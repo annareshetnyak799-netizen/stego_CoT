@@ -1,0 +1,36 @@
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+
+# Jupyter
+.ipynb_checkpoints/
+
+# Secrets
+.env
+.envrc
+
+# Model weights — use HuggingFace Hub instead
+*.pt
+*.safetensors
+*.bin
+*.onnx
+hf_cache/
+
+# OS
+.DS_Store
+
+# PDFs — copyright; share arXiv links in docs/papers.md
+docs/*.pdf
+docs/.DS_Store
+
+# Personal working notes — not for public repo
+anna-notes.md
+project.md
+stage1-lit-review-plan.md
+
+# External repo — see README for link
+Vector-SFT/
+
+# Root-level notebook copy (canonical version is in notebooks/)
+stego_cot_activation_probing.ipynb

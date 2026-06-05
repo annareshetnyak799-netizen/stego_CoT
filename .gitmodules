@@ -1,0 +1,3 @@
+[submodule "external/motivated-reasoning"]
+	path = external/motivated-reasoning
+	url = https://github.com/seyedparsa/motivated-reasoning

@@ -34,3 +34,6 @@ Vector-SFT/
 
 # Root-level notebook copy (canonical version is in notebooks/)
 stego_cot_activation_probing.ipynb
+
+# Scratch / working dir — not for public repo
+stuff/

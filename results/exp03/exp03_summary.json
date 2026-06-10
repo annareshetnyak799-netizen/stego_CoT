@@ -3,28 +3,29 @@
   "lora": {
     "r": 16,
     "alpha": 32,
-    "target_modules": [
-      "q_proj",
-      "k_proj",
-      "v_proj",
-      "o_proj"
-    ]
+    "target_modules": ["q_proj", "k_proj", "v_proj", "o_proj"]
   },
   "n_train": 242,
   "n_test": 61,
-  "lora_fidelity": 0.2,
+  "lora_fidelity": 0.11475409836065574,
   "pre_gen": {
     "layer0_auroc": 0.5,
     "best_layer": 1,
     "best_auroc": 1.0
   },
   "mean_cot": {
-    "layer0_auroc": 0.9542735042735042,
+    "layer0_auroc": 0.9792735042735042,
     "best_layer": 1,
     "best_auroc": 1.0
   },
-  "logitlens_ref": {
-    "onset_layer": 29,
-    "stego_peak_prob": 0.97
-  }
+  "fidelity_split": {
+    "n_hifi": 7,
+    "n_lofi": 54,
+    "hifi_layer0_auroc": 0.5,
+    "hifi_best_auroc": 1.0,
+    "lofi_layer0_auroc": 0.5,
+    "lofi_best_auroc": 1.0,
+    "verdict": "LORA_PRESENCE_DETECTOR"
+  },
+  "logitlens_ref": {"onset_layer": 29, "stego_peak_prob": 0.97}
 }

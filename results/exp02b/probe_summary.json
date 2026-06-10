@@ -1,0 +1,25 @@
+{
+  "model": "meta-llama/Llama-3.1-8B-Instruct",
+  "n_pairs": 303,
+  "probe": {
+    "pre": {
+      "best_layer": 1,
+      "best_auroc": 1.0
+    },
+    "mean": {
+      "best_layer": 1,
+      "best_auroc": 1.0
+    },
+    "post": {
+      "best_layer": 14,
+      "best_auroc": 0.9784582997402133
+    }
+  },
+  "transfer_auroc_held_out": 1.0,
+  "logitlens_ref": {
+    "stego_peak_prob": 0.97,
+    "stego_peak_layer": 32,
+    "onset_layer": 29,
+    "open_peak_prob": 0.037
+  }
+}

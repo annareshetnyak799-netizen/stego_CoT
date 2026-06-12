@@ -210,4 +210,19 @@ AUROC computed separately for high- and low-fidelity subsets to determine whethe
 |---|---|---|
 | H1: pre-gen signal of encoding intent detectable via linear probe | Not supported (weight confound) | Within-model comparison: probe on positions where logit lens P(letter) is high vs. low, same model weights |
 | H2: probe trained on acrostic scheme generalises to unseen encoding schemes | Not tested | Train on exp01/exp02b data; evaluate on Unicode-based and grammatical-variation encodings |
-| H3: model attends to previously encoded acrostic tokens during generation | Not tested | Attention weight analysis on exp01/exp02b data; compare attention to stego-token positions vs. matched baseline positions |
+| H3: model attends to previously encoded acrostic tokens during generation | Not tested | Within-stego attention analysis: does attention to acrostic positions grow with K? |
+
+---
+
+## exp04 - planned
+
+**Hypothesis (H3):** Within stego generations, mean attention weight from the position of acrostic token K to the positions of previously encoded acrostic tokens {1..K-1} increases monotonically with K. No such trend is observed at matched sentence-initial positions in open generations.
+
+**Falsifier:** No monotonic growth with K in stego condition -> model relies solely on the prompt (re-reads the target word each time), not on previously encoded tokens. H3 rejected.
+
+**Setup:**
+- Data: `exp01/valid_pairs.json` (303 pairs, Llama-3.1-8B)
+- Method: forward pass with `output_attentions=True` on existing generated text; no new generation required
+- Metric: mean attention weight to acrostic positions {1..K-1} as a function of K, per-layer, per-head; compare trend slope in stego vs open
+
+**Motivation:** Does the model attend to previously encoded tokens, or does it only attend to the initial secret message in the prompt? If attention to acrostic positions grows with K, this is evidence of sustained internal computation - the model uses previously encoded letters as working memory, not just the prompt.

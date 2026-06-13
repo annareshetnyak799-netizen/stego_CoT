@@ -1,0 +1,11 @@
+{
+  "model": "meta-llama/Llama-3.1-8B-Instruct",
+  "n_pairs": 77,
+  "n_skipped": 3,
+  "ctrl_offset": 8,
+  "k_vals": [1, 2, 3],
+  "acrostic_stego": [0.018759, 0.01592,  0.013251],
+  "acrostic_open":  [0.006158, 0.006378, 0.006508],
+  "control_stego":  [0.003477, 0.002432, 0.001865],
+  "control_open":   [0.003394, 0.003309, 0.002458]
+}

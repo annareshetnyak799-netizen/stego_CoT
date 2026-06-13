@@ -246,3 +246,47 @@ Elevation of stego attention over open at each K:
 **Conclusion:** H3 (monotonic per-position growth with K) is not supported: the per-position slope is significantly negative in the stego condition (t = −18.1, p < 0.0001). This decrease is a normalisation artefact — as K grows, the attention budget is divided across K−1 previous positions, reducing the per-position mean. The total attention allocated to acrostic positions does increase with K (0.019 → 0.032 → 0.040), consistent with incremental accumulation of focus.
 
 A robust positive finding is confirmed: stego attention to sentence-initial positions is significantly elevated above open at all K (p < 0.0001 for K = 1, 2, 3; approximately 3× at K = 1). The signal is strongest in layers 10–15. The elevation is present from K = 1, indicating that the model adopts a structurally distinct attention pattern from the first encoded letter onward, rather than building working memory incrementally across letters.
+
+---
+
+## exp04b - 2026-06-13
+
+**Question:** Is the attention elevation (exp04) specific to acrostic positions, or a general property of stego CoT text?
+
+**Design:** For each pair, a single forward pass extracts attention curves for two sets of K positions:
+- **Acrostic positions:** first token of each paragraph (the encoded letter)
+- **Control positions:** token at offset +8 within the same paragraph (mid-sentence)
+
+**Setup:**
+- Data: same as exp04 (n = 77 high-fidelity pairs)
+- Control offset: 8 tokens past each sentence-initial position
+- One forward pass per text; both curves extracted simultaneously
+
+**Results:**
+
+Elevation test (stego > open, one-sample t-test on paired differences):
+
+| Position set | K=1 | K=2 | K=3 |
+|---|---|---|---|
+| Acrostic | t = 43.4, p < 0.0001 ** | t = 25.0, p < 0.0001 ** | t = 12.1, p < 0.0001 ** |
+| Control (mid-sentence) | t = 0.19, p = 0.85 | t = −2.4, p = 0.018 | t = −2.1, p = 0.042 |
+
+Mean attention values:
+
+| | Acrostic stego | Acrostic open | Control stego | Control open |
+|---|---|---|---|---|
+| K=1 | 0.01876 | 0.00616 | 0.00348 | 0.00339 |
+| K=2 | 0.01592 | 0.00638 | 0.00243 | 0.00331 |
+| K=3 | 0.01325 | 0.00651 | 0.00187 | 0.00246 |
+
+Acrostic vs control within stego (paired):
+
+| K | Difference | t | p |
+|---|---|---|---|
+| 1 | +0.01528 | 43.4 | <0.0001 |
+| 2 | +0.01349 | 55.4 | <0.0001 |
+| 3 | +0.01139 | 46.1 | <0.0001 |
+
+![Control vs acrostic](exp04b/control_vs_acrostic.png)
+
+**Conclusion:** The attention elevation is specific to acrostic (sentence-initial) positions. At mid-sentence control positions (+8 tokens), no stego > open elevation is observed (K=1: p = 0.85, n.s.); at K=2,3 the difference is marginally negative, consistent with attention budget redistribution away from mid-sentence tokens toward sentence-initial positions. The acrostic–control gap within stego is large and highly significant at all K (t > 43, p < 0.0001). This rules out a general structural difference between stego and open CoT text as the explanation for exp04 results, and supports the interpretation that the model specifically tracks encoding positions.

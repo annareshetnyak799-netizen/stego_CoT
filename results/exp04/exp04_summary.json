@@ -1,0 +1,10 @@
+{
+  "model": "meta-llama/Llama-3.1-8B-Instruct",
+  "n_pairs": 77,
+  "n_skipped": 3,
+  "k_vals": [1, 2, 3],
+  "stego_mean_by_k": [0.018759, 0.01592, 0.013251],
+  "open_mean_by_k": [0.006158, 0.006378, 0.006508],
+  "stego_slope_mean": -0.002853,
+  "open_slope_mean": -0.000287
+}

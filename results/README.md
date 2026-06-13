@@ -210,19 +210,39 @@ AUROC computed separately for high- and low-fidelity subsets to determine whethe
 |---|---|---|
 | H1: pre-gen signal of encoding intent detectable via linear probe | Not supported (weight confound) | Within-model comparison: probe on positions where logit lens P(letter) is high vs. low, same model weights |
 | H2: probe trained on acrostic scheme generalises to unseen encoding schemes | Not tested | Train on exp01/exp02b data; evaluate on Unicode-based and grammatical-variation encodings |
-| H3: model attends to previously encoded acrostic tokens during generation | Not tested | Within-stego attention analysis: does attention to acrostic positions grow with K? |
+| H3: model attends to previously encoded acrostic tokens during generation | H3 rejected; elevation confirmed (exp04) | — |
 
 ---
 
-## exp04 - planned
+## exp04 - 2026-06-13
 
 **Hypothesis (H3):** Within stego generations, mean attention weight from the position of acrostic token K to the positions of previously encoded acrostic tokens {1..K-1} increases monotonically with K. No such trend is observed at matched sentence-initial positions in open generations.
 
-**Falsifier:** No monotonic growth with K in stego condition -> model relies solely on the prompt (re-reads the target word each time), not on previously encoded tokens. H3 rejected.
+**Falsifier:** No monotonic growth with K → model relies solely on the prompt, not on previously encoded tokens.
 
 **Setup:**
-- Data: `exp01/valid_pairs.json` (303 pairs, Llama-3.1-8B)
-- Method: forward pass with `output_attentions=True` on existing generated text; no new generation required
-- Metric: mean attention weight to acrostic positions {1..K-1} as a function of K, per-layer, per-head; compare trend slope in stego vs open
+- Data: `exp01/valid_pairs.json`, high-fidelity subset (fidelity = 1.0), n = 77 pairs (3 skipped: fewer than 2 recoverable positions)
+- Model: Llama-3.1-8B-Instruct; forward pass only, no new generation
+- Method: `output_attentions=True`, `attn_implementation='eager'`; mean attention weight from token at sent\_positions[K] to tokens at sent\_positions[:K], averaged over all heads and all previous positions, per layer
+- Statistical tests: (1) per-sample linear slope over K + one-sample t-test against zero; (2) paired elevation test at each K (one-sample t-test on stego − open difference)
 
-**Motivation:** Does the model attend to previously encoded tokens, or does it only attend to the initial secret message in the prompt? If attention to acrostic positions grows with K, this is evidence of sustained internal computation - the model uses previously encoded letters as working memory, not just the prompt.
+**Results:**
+
+| Condition | Mean per-position slope | t | p |
+|---|---|---|---|
+| Stego | −0.00285 | −18.06 | <0.0001 |
+| Open  | −0.00029 | −1.10  | 0.28 (n.s.) |
+
+Elevation of stego attention over open at each K:
+
+| K | Stego mean | Open mean | Difference | t | p |
+|---|---|---|---|---|---|
+| 1 | 0.01876 | 0.00616 | +0.01260 | 43.43 | <0.0001 |
+| 2 | 0.01592 | 0.00638 | +0.00954 | 24.98 | <0.0001 |
+| 3 | 0.01325 | 0.00651 | +0.00674 | 12.11 | <0.0001 |
+
+![Attention vs K](exp04/attention_vs_k.png)
+
+**Conclusion:** H3 (monotonic per-position growth with K) is not supported: the per-position slope is significantly negative in the stego condition (t = −18.1, p < 0.0001). This decrease is a normalisation artefact — as K grows, the attention budget is divided across K−1 previous positions, reducing the per-position mean. The total attention allocated to acrostic positions does increase with K (0.019 → 0.032 → 0.040), consistent with incremental accumulation of focus.
+
+A robust positive finding is confirmed: stego attention to sentence-initial positions is significantly elevated above open at all K (p < 0.0001 for K = 1, 2, 3; approximately 3× at K = 1). The signal is strongest in layers 10–15. The elevation is present from K = 1, indicating that the model adopts a structurally distinct attention pattern from the first encoded letter onward, rather than building working memory incrementally across letters.

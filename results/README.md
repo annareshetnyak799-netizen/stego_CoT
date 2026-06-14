@@ -211,7 +211,7 @@ AUROC computed separately for high- and low-fidelity subsets to determine whethe
 | H1: pre-gen signal of encoding intent detectable via linear probe | Not supported (weight confound) | Within-model comparison: probe on positions where logit lens P(letter) is high vs. low, same model weights |
 | H2: probe trained on acrostic scheme generalises to unseen encoding schemes | Not tested | Train on exp01/exp02b data; evaluate on Unicode-based and grammatical-variation encodings |
 | H3: model attends to previously encoded acrostic tokens during generation | H3 rejected; elevation confirmed (exp04) | — |
-| H4: attention heads 28 (L27) and 8/29/30 (L11–12) are causally responsible for the exp04 elevation | Not tested | Head ablation: zero out candidate heads, measure drop in elevation and encoding fidelity |
+| H4: attention heads 28 (L27) and 8/29/30 (L11–12) are causally responsible for the exp04 elevation | Partially tested (exp05a): top-5 heads account for ~14% of elevation; signal is distributed across all heads | Generation ablation or layer-level intervention |
 
 ---
 
@@ -326,6 +326,37 @@ Top-5 heads by mean elevation across all layers:
 
 2. **Heads 8, 29, 30, layers 11–12** (mid layers): a cluster of four heads of approximately equal strength, consistent with the layers 10–15 signal observed in the exp04 heatmap. These heads likely track paragraph structure earlier in processing.
 
-The remaining 27 heads show near-zero or negative elevation. The acrostic tracking mechanism is implemented by a specific, identifiable subset of attention heads rather than being a model-wide property.
+The remaining 27 heads show near-zero or negative elevation at their peak layers. The effect is concentrated in a small number of heads rather than being model-wide — however, see exp05a for a revision of this interpretation when averaged across all layers.
 
 **Follow-up (H4):** causal verification via head ablation — zero out head 28 and the L11–12 cluster; test whether elevation drops and encoding fidelity degrades.
+
+---
+
+## exp05a - 2026-06-14
+
+**Question:** How much of the exp04 elevation is attributable to head 28 and the L11–12 cluster? Is the signal disrupted by analytically removing the top-5 heads?
+
+**Method:** Analytical ablation — same forward passes as exp04c; elevation recomputed under six head configurations without modifying the model.
+
+**Setup:**
+- Data: same 77 high-fidelity pairs as exp04
+- Configurations: all\_heads, no\_head28, head28\_only, cluster2\_only, both\_clusters, background (27 heads excluding top-5)
+
+**Results:**
+
+| Configuration | n heads | Mean elev | % of baseline | t | p |
+|---|---|---|---|---|---|
+| all\_heads (baseline) | 32 | 0.01049 | 100% | 33.6 | <0.0001 |
+| no\_head28 | 31 | 0.00997 | 95% | 32.6 | <0.0001 |
+| head28\_only | 1 | 0.02659 | 254% | 44.8 | <0.0001 |
+| cluster2\_only | 4 | 0.01648 | 157% | 38.3 | <0.0001 |
+| both\_clusters | 5 | 0.01851 | 176% | 41.1 | <0.0001 |
+| background | 27 | 0.00901 | 86% | 30.9 | <0.0001 |
+
+![Head contribution](exp05a/head_contribution.png)
+
+**Conclusion:** Head 28 has 2.5× higher per-head elevation than the model average (t = 44.8), confirming it as the strongest individual tracker. However, removing it reduces overall elevation by only 5%, and removing all top-5 heads leaves 86% of the baseline signal intact (t = 30.9, p < 0.0001). The elevation signal is a distributed property of the full attention mechanism, not a localised circuit.
+
+This revises the exp04c interpretation: the heatmap showed peak elevation per layer, which highlighted top-5 heads. When averaged across all layers, the 27 background heads carry comparable aggregate signal. There is a gradient of intensity (top-5 heads are more specialised) but no sharp boundary between "tracking" and "non-tracking" heads.
+
+**Implication for H4:** Zeroing the top-5 heads is insufficient to disrupt elevation. Causal verification requires either a broader intervention (many heads or full layers) or a generation fidelity test. From a detection standpoint, distributed signal is more robust: it cannot be evaded by suppressing a small number of heads.

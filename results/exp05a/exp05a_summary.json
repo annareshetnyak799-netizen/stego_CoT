@@ -1,0 +1,50 @@
+{
+  "model": "meta-llama/Llama-3.1-8B-Instruct",
+  "n_pairs": 77,
+  "n_skipped": 3,
+  "baseline_elev": 0.010491,
+  "configs": {
+    "all_heads": {
+      "n_heads": 32,
+      "mean_elev": 0.010491,
+      "pct_of_baseline": 100.0,
+      "t": 33.611,
+      "p": 0.0
+    },
+    "no_head28": {
+      "n_heads": 31,
+      "mean_elev": 0.009971,
+      "pct_of_baseline": 95.0,
+      "t": 32.612,
+      "p": 0.0
+    },
+    "head28_only": {
+      "n_heads": 1,
+      "mean_elev": 0.026591,
+      "pct_of_baseline": 253.5,
+      "t": 44.813,
+      "p": 0.0
+    },
+    "cluster2_only": {
+      "n_heads": 4,
+      "mean_elev": 0.016483,
+      "pct_of_baseline": 157.1,
+      "t": 38.296,
+      "p": 0.0
+    },
+    "both_clusters": {
+      "n_heads": 5,
+      "mean_elev": 0.018505,
+      "pct_of_baseline": 176.4,
+      "t": 41.083,
+      "p": 0.0
+    },
+    "background": {
+      "n_heads": 27,
+      "mean_elev": 0.009007,
+      "pct_of_baseline": 85.9,
+      "t": 30.913,
+      "p": 0.0
+    }
+  }
+}

@@ -1,0 +1,15 @@
+{
+  "model": "meta-llama/Llama-3.1-8B-Instruct",
+  "n_pairs": 77,
+  "n_skipped": 3,
+  "top_heads": [28, 8, 27, 30, 29],
+  "best_head": 28,
+  "best_layer": 27,
+  "head_scores": {
+    "28": 0.026591,
+    "8":  0.016891,
+    "27": 0.016691,
+    "30": 0.016339,
+    "29": 0.016012
+  }
+}

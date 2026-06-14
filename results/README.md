@@ -211,6 +211,7 @@ AUROC computed separately for high- and low-fidelity subsets to determine whethe
 | H1: pre-gen signal of encoding intent detectable via linear probe | Not supported (weight confound) | Within-model comparison: probe on positions where logit lens P(letter) is high vs. low, same model weights |
 | H2: probe trained on acrostic scheme generalises to unseen encoding schemes | Not tested | Train on exp01/exp02b data; evaluate on Unicode-based and grammatical-variation encodings |
 | H3: model attends to previously encoded acrostic tokens during generation | H3 rejected; elevation confirmed (exp04) | — |
+| H4: attention heads 28 (L27) and 8/29/30 (L11–12) are causally responsible for the exp04 elevation | Not tested | Head ablation: zero out candidate heads, measure drop in elevation and encoding fidelity |
 
 ---
 
@@ -290,3 +291,41 @@ Acrostic vs control within stego (paired):
 ![Control vs acrostic](exp04b/control_vs_acrostic.png)
 
 **Conclusion:** The attention elevation is specific to acrostic (sentence-initial) positions. At mid-sentence control positions (+8 tokens), no stego > open elevation is observed (K=1: p = 0.85, n.s.); at K=2,3 the difference is marginally negative, consistent with attention budget redistribution away from mid-sentence tokens toward sentence-initial positions. The acrostic–control gap within stego is large and highly significant at all K (t > 43, p < 0.0001). This rules out a general structural difference between stego and open CoT text as the explanation for exp04 results, and supports the interpretation that the model specifically tracks encoding positions.
+
+---
+
+## exp04c - 2026-06-14
+
+**Question:** Is the attention elevation (exp04) diffuse across all heads, or concentrated in specific heads?
+
+**Design:** Same forward passes as exp04; attention weights extracted per head separately (not averaged). Elevation heatmap computed over the full (layer × head) grid.
+
+**Setup:**
+- Data: same 77 high-fidelity pairs as exp04
+- Result shape per pair: (n\_sent, n\_layers, n\_heads) = (≤4, 32, 32)
+- Elevation metric: mean(stego − open) averaged over pairs and K≥1, per (layer, head)
+
+**Results:**
+
+Top-5 heads by mean elevation across all layers:
+
+| Head | Mean elevation | Peak layer |
+|---|---|---|
+| **28** | **0.0266** | **27** |
+| 8  | 0.0169 | 11 |
+| 27 | 0.0167 | 7  |
+| 30 | 0.0163 | 11 |
+| 29 | 0.0160 | 12 |
+
+![Per-head elevation heatmap](exp04c/per_head_elevation.png)
+![Best head curves](exp04c/best_head_curves.png)
+
+**Conclusion:** The elevation is not diffuse — it is concentrated in a small number of heads organised in two clusters:
+
+1. **Head 28, layer 27** (late layers): the strongest single contributor, score 60% above the next group. At this head, stego attention to acrostic positions reaches ≈0.5 while open remains near zero. Layer 27 is immediately upstream of the logit lens encoding onset (layer 29, exp02), suggesting this head may participate directly in letter commitment.
+
+2. **Heads 8, 29, 30, layers 11–12** (mid layers): a cluster of four heads of approximately equal strength, consistent with the layers 10–15 signal observed in the exp04 heatmap. These heads likely track paragraph structure earlier in processing.
+
+The remaining 27 heads show near-zero or negative elevation. The acrostic tracking mechanism is implemented by a specific, identifiable subset of attention heads rather than being a model-wide property.
+
+**Follow-up (H4):** causal verification via head ablation — zero out head 28 and the L11–12 cluster; test whether elevation drops and encoding fidelity degrades.

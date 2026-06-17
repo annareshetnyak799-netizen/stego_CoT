@@ -1,0 +1,45 @@
+{
+  "model": "meta-llama/Llama-3.1.8B-Instruct",
+  "n_pairs": 70,
+  "skipped": 1,
+  "metric1_elevation": {
+    "stego": {
+      "mean": 0.010672,
+      "sem": 0.000321,
+      "t": 33.009,
+      "p": 0.0
+    },
+    "ctrl": {
+      "mean": 0.010091,
+      "sem": 0.000338,
+      "t": 29.622,
+      "p": 0.0
+    }
+  },
+  "metric2_prompt_attention": {
+    "stego": {
+      "mean": 0.85598,
+      "sem": 0.002003
+    },
+    "control": {
+      "mean": 0.856911,
+      "sem": 0.002051
+    },
+    "open": {
+      "mean": 0.836352,
+      "sem": 0.003863
+    },
+    "ttest_stego_vs_open": {
+      "t": 7.819,
+      "p": 0.0
+    },
+    "ttest_control_vs_open": {
+      "t": 8.545,
+      "p": 0.0
+    },
+    "ttest_stego_vs_control": {
+      "t": -1.434,
+      "p": 0.156098
+    }
+  }
+}

@@ -1,0 +1,14 @@
+{
+  "model": "meta-llama/Llama-3.1-8B-Instruct",
+  "n_pairs": 70,
+  "n_skipped_gen": 9,
+  "n_skipped_attn": 1,
+  "stego_baseline": 0.010491,
+  "control_elevation": {
+    "mean": 0.010054,
+    "sem": 0.000344,
+    "pct_of_stego_baseline": 95.8,
+    "t": 29.055,
+    "p": 0.0
+  }
+}

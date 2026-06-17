@@ -360,3 +360,53 @@ The remaining 27 heads show near-zero or negative elevation at their peak layers
 This revises the exp04c interpretation: the heatmap showed peak elevation per layer, which highlighted top-5 heads. When averaged across all layers, the 27 background heads carry comparable aggregate signal. There is a gradient of intensity (top-5 heads are more specialised) but no sharp boundary between "tracking" and "non-tracking" heads.
 
 **Implication for H4:** Zeroing the top-5 heads is insufficient to disrupt elevation. Causal verification requires either a broader intervention (many heads or full layers) or a generation fidelity test. From a detection standpoint, distributed signal is more robust: it cannot be evaded by suppressing a small number of heads.
+
+---
+
+## exp06_control - 2026-06-16
+
+**Question:** Is the attention elevation from exp04–05a specific to steganographic hiding, or does it appear whenever the model is constrained to start sentences with specific letters?
+
+**Method:** Generated a third condition — open acrostic instruction ("start each reasoning step with the letters S, A, F, E in order, one letter per step") — without the word "Hidden". Forward pass with `output_attentions=True`; elevation computed as (control − open) per pair. Compared against stego baseline from exp04/05a.
+
+**Setup:**
+- Data: same high-fidelity subset as exp04–05a (N_MAX=80); 70 pairs used after fidelity filtering
+- n_skipped_gen: 9 (control fidelity < 0.75), n_skipped_attn: 1
+- GPU: L4
+
+**Results:**
+
+| Condition | Elevation | % of stego baseline | t | p |
+|---|---|---|---|---|
+| open (baseline) | 0 | 0% | — | — |
+| stego (exp04) | 0.010491 | 100% | 33.6 | <0.0001 |
+| **control (exp06)** | **0.010054** | **95.8%** | **29.1** | **<0.0001** |
+
+![Control vs stego elevation](exp06_control/control_vs_stego.png)
+
+**Conclusion: falsifier triggered.**
+
+Control elevation (95.8% of stego baseline) is statistically indistinguishable from stego elevation. The effect found in exp04–05a is driven by the structural constraint on sentence-start letters, not by the secrecy of the encoding instruction.
+
+**Implication for exp04–05a:** the elevation signal is real and reproducible, but not diagnostic for steganography specifically. It measures "model follows a first-letter rule" regardless of whether that rule is hidden or explicit.
+
+**Next steps:** H4 calibration (log-probabilities at acrostic positions) and H1 attention probe trained to distinguish stego vs control rather than stego vs open.
+
+---
+
+## exp07 - 2026-06-17
+
+**Question (raised by colleague Tanselu):** does the model attend back to the prompt (where the letter constraint is specified), rather than between sentence starts within the CoT?
+
+**Method:** two metrics measured in parallel on the same 70 pairs: (1) elevation as before; (2) `sum(attn[pos_K → 0:plen])` per head — fraction of attention allocated to prompt tokens.
+
+**Results (n=70, skipped=1):**
+
+| Metric | Stego | Control | Open | Stego vs ctrl |
+|---|---|---|---|---|
+| Elevation (rel. to open) | 0.01067 ± 0.000321 | 0.01009 ± 0.000338 | 0 | — |
+| Prompt attention fraction | 0.856 ± 0.002 | 0.857 ± 0.002 | 0.836 ± 0.004 | t=−1.43, p=0.156 |
+
+Prompt attention vs open: stego t=7.82 p≈0, control t=8.55 p≈0.
+
+**Conclusion:** Constrained conditions (stego and control) allocate ~2 percentage points more attention to prompt tokens than open — directionally confirming the colleague's hypothesis. Stego ≈ control in both metrics. **Caveat:** stego/control prompts are ~30 tokens longer than open, which mechanistically confounds the comparison (a larger `plen` raises the sum independently of any specific attention to letter-instruction tokens). To isolate true instruction-seeking attention, one would need to compare attention to instruction tokens separately from neutral prompt tokens. This is a supporting observation for exp06_control, not a standalone result.

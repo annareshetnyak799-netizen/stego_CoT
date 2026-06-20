@@ -210,8 +210,11 @@ AUROC computed separately for high- and low-fidelity subsets to determine whethe
 |---|---|---|
 | H1: pre-gen signal of encoding intent detectable via linear probe | Not supported (weight confound) | Within-model comparison: probe on positions where logit lens P(letter) is high vs. low, same model weights |
 | H2: probe trained on acrostic scheme generalises to unseen encoding schemes | Not tested | Train on exp01/exp02b data; evaluate on Unicode-based and grammatical-variation encodings |
-| H3: model attends to previously encoded acrostic tokens during generation | H3 rejected; elevation confirmed (exp04) | — |
-| H4: attention heads 28 (L27) and 8/29/30 (L11–12) are causally responsible for the exp04 elevation | Partially tested (exp05a): top-5 heads account for ~14% of elevation; signal is distributed across all heads | Generation ablation or layer-level intervention |
+| H3: model attends to previously encoded acrostic tokens during generation | H3 (monotonic growth) rejected; elevation confirmed and characterised (exp04–05a) | — |
+| H3': attention elevation is stego-specific | ✗ Rejected (exp06): control = 95.8% of stego → structural property of letter constraint | — |
+| H4 (attention): top-5 heads causally responsible for elevation | Partially tested (exp05a): top-5 = ~14% of elevation; signal distributed across all 32 heads | Generation ablation or layer-level intervention |
+| H4 (log P): sentence-start log P is anomalous in stego vs open | ✓ Confirmed (exp08): z_stego=+0.637, z_open=−0.470; t=10, p≈0; opposing directions | — |
+| H4 (log P): log P anomaly is stego-specific | ✗ Rejected (exp08b): z_control=+0.514 ≈ z_stego → structural property of letter constraint | — |
 
 ---
 
@@ -410,3 +413,79 @@ Control elevation (95.8% of stego baseline) is statistically indistinguishable f
 Prompt attention vs open: stego t=7.82 p≈0, control t=8.55 p≈0.
 
 **Conclusion:** Constrained conditions (stego and control) allocate ~2 percentage points more attention to prompt tokens than open — directionally confirming the colleague's hypothesis. Stego ≈ control in both metrics. **Caveat:** stego/control prompts are ~30 tokens longer than open, which mechanistically confounds the comparison (a larger `plen` raises the sum independently of any specific attention to letter-instruction tokens). To isolate true instruction-seeking attention, one would need to compare attention to instruction tokens separately from neutral prompt tokens. This is a supporting observation for exp06_control, not a standalone result.
+
+---
+
+## exp08 - 2026-06-18
+
+**Hypothesis (H4 — mentor, meeting June 15):** Log P of sentence-start tokens is anomalous in stego CoT relative to the open condition. The model is more confident about constrained letters.
+
+**Method:** Teacher forcing — forward pass on already-generated text, no new generation. For each token i at position ≥ plen, log P is computed as `lp[i-1, token_ids[i]]`. Two comparisons:
+1. Cross-condition: mean log P at sentence-start positions, stego vs open, paired t-test.
+2. Within-sequence z-score: z-score of sentence-start log P relative to all other tokens in the same CoT — computed for both conditions to distinguish stego-specific from structural effects.
+
+**Setup:**
+- Data: `exp01/valid_pairs.json`, high-fidelity subset (fidelity = 1.0), n = 78 pairs (2 skipped: stego fidelity < 0.75 on regeneration)
+- Open condition: taken from `pair['open_ids']` (exp01 data); stego condition regenerated to obtain log P of that specific generation
+- GPU: L4
+
+**Results:**
+
+Metric 1 — cross-condition sentence-start log P:
+
+| Condition | Mean log P | SE |
+|---|---|---|
+| open | −0.337 | 0.025 |
+| stego | −0.061 | 0.007 |
+| diff (stego − open) | +0.276 | 0.027 |
+| t (paired) | 10.05 | p ≈ 0 |
+
+Metric 2 — within-sequence z-score at sentence-start positions:
+
+| Condition | Mean z | SE | t vs 0 | p |
+|---|---|---|---|---|
+| stego | +0.637 | 0.022 | 28.7 | ≈ 0 |
+| open  | −0.470 | 0.087 | −5.4 | ≈ 0 |
+
+![Log P calibration](exp08/exp08_logprob.png)
+
+**Conclusion:** H4 confirmed. Sentence-start tokens are anomalously HIGH confidence within stego CoT (z = +0.637) and anomalously LOW confidence within open CoT (z = −0.470). The directions are opposite: in unconstrained reasoning, paragraph-initial tokens are points of high uncertainty; in stego, they are points of near-certainty (the letter is specified by the instruction). The effect is consistent across all 78 pairs. Requires a control condition to determine whether the effect is stego-specific or structural.
+
+---
+
+## exp08b - 2026-06-18
+
+**Question:** Is the log P anomaly (exp08) specific to steganographic hiding, or does it appear whenever the model is given an explicit open letter constraint?
+
+**Method:** Same teacher forcing as exp08; condition replaced with open acrostic instruction ("start each reasoning step with the letters S, A, F, E in order, one letter per step"), without the word "Hidden". Compared against exp08 stego (z = +0.637) and open (z = −0.470) reference values.
+
+**Setup:**
+- n = 71 pairs (9 skipped: control fidelity < 0.75)
+- exp08 reference z-values loaded from `exp08/exp08_summary.json` or used as hardcoded fallback
+- GPU: L4
+
+**Results:**
+
+Metric 1 — cross-condition sentence-start log P:
+
+| Condition | Mean log P | diff vs open | t | p |
+|---|---|---|---|---|
+| open    | −0.345 | —      | —    | —   |
+| control | −0.092 | +0.253 | 8.99 | ≈ 0 |
+| stego (exp08) | −0.061 | +0.276 | 10.05 | ≈ 0 |
+
+Metric 2 — within-sequence z-score (all three conditions):
+
+| Condition | Mean z | Source |
+|---|---|---|
+| open (baseline) | −0.470 | exp08 |
+| **control**     | **+0.514** | exp08b |
+| stego           | +0.637 | exp08 |
+
+![Log P control](exp08b/exp08b_logprob_control.png)
+
+**Conclusion: falsifier triggered.**
+
+Control z (+0.514) is nearly equal to stego z (+0.637); both are far from open (−0.470) and in the same direction. The log P anomaly is a structural property of any letter constraint, not of steganographic hiding — the same finding as exp06_control for attention.
+
+**Overall conclusion for exp04–exp08b:** both signal types studied — attention elevation and log P elevation at sentence-start positions — are structural properties of first-letter constraints. They measure "model is following a letter rule" regardless of whether that rule is hidden or explicit. Neither signal distinguishes stego from control conditions.

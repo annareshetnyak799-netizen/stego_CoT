@@ -20,9 +20,10 @@ hf_cache/
 # OS
 .DS_Store
 
-# PDFs — copyright; share arXiv links in docs/papers.md
+# PDFs — not for public repo
 docs/*.pdf
 docs/.DS_Store
+results/*.pdf
 
 # Personal working notes — not for public repo
 anna-notes.md

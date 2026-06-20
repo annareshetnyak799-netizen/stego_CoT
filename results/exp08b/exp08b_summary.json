@@ -1,0 +1,47 @@
+{
+  "model": "meta-llama/Llama-3.1-8B-Instruct",
+  "n_pairs": 71,
+  "skipped": 9,
+  "exp08_reference": {
+    "stego_z_mean": 0.637188,
+    "stego_z_sem": 0.022139,
+    "open_z_mean": -0.470254,
+    "open_z_sem": 0.086539
+  },
+  "metric1_sentence_start_logp": {
+    "control": {
+      "mean": -0.091514,
+      "sem": 0.009702
+    },
+    "open": {
+      "mean": -0.344619,
+      "sem": 0.026083
+    },
+    "diff_ctrl_minus_open": {
+      "mean": 0.253105,
+      "sem": 0.027961
+    },
+    "ttest_paired": {
+      "t": 8.988,
+      "p": 0.0
+    }
+  },
+  "metric2_within_zscore": {
+    "control": {
+      "mean_z": 0.514356,
+      "sem_z": 0.03166,
+      "ttest_vs_zero": {
+        "t": 16.212,
+        "p": 0.0
+      }
+    },
+    "open": {
+      "mean_z": -0.521366,
+      "sem_z": 0.091292,
+      "ttest_vs_zero": {
+        "t": -5.699,
+        "p": 0.0
+      }
+    }
+  }
+}

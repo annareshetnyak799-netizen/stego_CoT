@@ -1,0 +1,42 @@
+{
+  "model": "meta-llama/Llama-3.1-8B-Instruct",
+  "n_pairs": 78,
+  "skipped": 2,
+  "metric1_sentence_start_logp": {
+    "stego": {
+      "mean": -0.061124,
+      "sem": 0.007252
+    },
+    "open": {
+      "mean": -0.337072,
+      "sem": 0.025401
+    },
+    "diff_stego_minus_open": {
+      "mean": 0.275948,
+      "sem": 0.027289
+    },
+    "ttest_paired": {
+      "t": 10.047,
+      "p": 0.0
+    }
+  },
+  "metric2_within_zscore": {
+    "stego": {
+      "mean_z": 0.637188,
+      "sem_z": 0.022139,
+      "ttest_vs_zero": {
+        "t": 28.726,
+        "p": 0.0
+      }
+    },
+    "open": {
+      "mean_z": -0.470254,
+      "sem_z": 0.086539,
+      "ttest_vs_zero": {
+        "t": -5.424,
+        "p": 0.0
+      }
+    },
+    "interpretation": "z>0: sentence-starts higher log P than rest of CoT; z<0: lower. stego-specific if stego z != 0 and open z ~ 0."
+  }
+}

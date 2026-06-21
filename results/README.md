@@ -399,7 +399,7 @@ Control elevation (95.8% of stego baseline) is statistically indistinguishable f
 
 ## exp07 - 2026-06-17
 
-**Question (raised by colleague Tanselu):** does the model attend back to the prompt (where the letter constraint is specified), rather than between sentence starts within the CoT?
+**Question (raised by colleague Tansylu):** does the model attend back to the prompt (where the letter constraint is specified), rather than between sentence starts within the CoT?
 
 **Method:** two metrics measured in parallel on the same 70 pairs: (1) elevation as before; (2) `sum(attn[pos_K → 0:plen])` per head — fraction of attention allocated to prompt tokens.
 

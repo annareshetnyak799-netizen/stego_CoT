@@ -1,0 +1,65 @@
+{
+  "model": "meta-llama/Llama-3.1-8B-Instruct",
+  "dataset": "exp11_pairs.json",
+  "n_pairs": 641,
+  "skipped": 18,
+  "n_layers": 32,
+  "n_heads": 32,
+  "entropy": {
+    "stego_mean": 3.431156,
+    "open_mean": 3.189841,
+    "diff": 0.241314,
+    "ttest": {
+      "t": 54.094,
+      "p": 0.0
+    }
+  },
+  "within_kl": {
+    "stego_mean": 0.345649,
+    "open_mean": 0.303775,
+    "diff": 0.041874,
+    "ttest": {
+      "t": 15.86,
+      "p": 0.0
+    }
+  },
+  "exp10_ref": {
+    "entropy": {
+      "stego_mean": 3.057106,
+      "open_mean": 2.909822,
+      "diff": 0.147284
+    },
+    "within_kl": {
+      "stego_mean": 0.411622,
+      "open_mean": 0.208869,
+      "diff": 0.202753
+    }
+  },
+  "top5_kl_diff_heads": [
+    {
+      "layer": 10,
+      "head": 2,
+      "kl_diff": 2.943857
+    },
+    {
+      "layer": 10,
+      "head": 1,
+      "kl_diff": 2.336305
+    },
+    {
+      "layer": 8,
+      "head": 11,
+      "kl_diff": 2.178349
+    },
+    {
+      "layer": 11,
+      "head": 12,
+      "kl_diff": 2.104318
+    },
+    {
+      "layer": 9,
+      "head": 31,
+      "kl_diff": 1.879941
+    }
+  ]
+}

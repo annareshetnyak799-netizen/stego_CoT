@@ -1,0 +1,45 @@
+{
+  "experiment": "exp13b \u2014 attention entropy and within-KL",
+  "n_triplets": 622,
+  "skipped": 0,
+  "entropy": {
+    "stego_mean": 3.432873,
+    "open_mean": 3.314207,
+    "control_mean": 3.426786,
+    "stego_vs_open": {
+      "diff": 0.118665,
+      "t": 23.923,
+      "p": 0.0
+    },
+    "stego_vs_control": {
+      "diff": 0.006087,
+      "t": 2.088,
+      "p": 0.037198
+    },
+    "control_vs_open": {
+      "diff": 0.112579,
+      "t": 22.153,
+      "p": 0.0
+    }
+  },
+  "within_kl": {
+    "stego_mean": 0.563784,
+    "open_mean": 0.592778,
+    "control_mean": 0.566744,
+    "stego_vs_open": {
+      "diff": -0.028994,
+      "t": -6.575,
+      "p": 0.0
+    },
+    "stego_vs_control": {
+      "diff": -0.002961,
+      "t": -1.078,
+      "p": 0.281349
+    },
+    "control_vs_open": {
+      "diff": -0.026034,
+      "t": -5.888,
+      "p": 0.0
+    }
+  }
+}

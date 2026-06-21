@@ -1,0 +1,50 @@
+{
+  "model": "meta-llama/Llama-3.1-8B-Instruct",
+  "n_pairs": 40,
+  "skipped": 40,
+  "entropy": {
+    "ctrl_mean": 3.028953,
+    "open_mean": 2.906608,
+    "diff": 0.122345,
+    "ttest": {
+      "t": 10.239,
+      "p": 0.0
+    }
+  },
+  "within_kl": {
+    "ctrl_mean": 0.400283,
+    "open_mean": 0.193043,
+    "diff": 0.207241,
+    "ttest": {
+      "t": 29.111,
+      "p": 0.0
+    }
+  },
+  "top5_kl_diff_heads": [
+    {
+      "layer": 8,
+      "head": 11,
+      "kl_diff": 4.327955
+    },
+    {
+      "layer": 8,
+      "head": 1,
+      "kl_diff": 3.057831
+    },
+    {
+      "layer": 27,
+      "head": 28,
+      "kl_diff": 2.7704
+    },
+    {
+      "layer": 29,
+      "head": 9,
+      "kl_diff": 2.612269
+    },
+    {
+      "layer": 10,
+      "head": 2,
+      "kl_diff": 2.575525
+    }
+  ]
+}

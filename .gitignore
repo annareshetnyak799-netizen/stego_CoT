@@ -37,3 +37,13 @@ stego_cot_activation_probing.ipynb
 
 # Scratch / working dir — not for public repo
 stuff/
+
+# exp06 session: logs + timestamped run output (keep scripts, data, notebook, docs)
+notebooks/results/*.log
+notebooks/results/exp06_runs/
+notebooks/results/resampling/
+notebooks/results/final/
+notebooks/results/**/*.jsonl
+notebooks/results/**/*.json
+notebooks/results/*.jsonl
+notebooks/results/*.json

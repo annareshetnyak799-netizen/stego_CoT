@@ -47,3 +47,7 @@ notebooks/results/**/*.jsonl
 notebooks/results/**/*.json
 notebooks/results/*.jsonl
 notebooks/results/*.json
+
+# big regenerable run HTMLs (keep figure.png + .md)
+notebooks/results/readback_dist/**/*.html
+notebooks/results/**/*.log

@@ -579,7 +579,8 @@ def _intervened_eager_attention_forward(
                     pos for pos in queries if 0 <= pos < attn_output.shape[2]
                 ]
                 if valid_queries:
-                    attn_output[:, heads, valid_queries, :] = 0
+                    for h in heads:
+                        attn_output[:, h, valid_queries, :] = 0
 
     attn_output = attn_output.transpose(1, 2).contiguous()
     return attn_output, attn_weights

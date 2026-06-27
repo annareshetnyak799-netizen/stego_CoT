@@ -1,0 +1,2163 @@
+[
+  {
+    "trace_id": 0,
+    "start_letter": "D",
+    "chain_start": "D",
+    "correct_s2_letter": "E",
+    "force_letter": "O",
+    "exp_readback_s3": "P",
+    "exp_plan_s3": "F",
+    "s1": "Dogs are great companions.",
+    "s2_base": "Every morning, they greet you with wagging tails.",
+    "s2_force": "On morning, they greet you with wagging tails.",
+    "s2_placebo": "Every morning, they greet you with wagging tails.",
+    "conditions": {
+      "base": {
+        "s2": "Every morning, they greet you with wagging tails.",
+        "letters": [
+          "F",
+          "F",
+          "F",
+          "F",
+          "F",
+          "F",
+          "F",
+          "F",
+          "F",
+          "F",
+          "F",
+          "F",
+          "F",
+          "F",
+          "F",
+          "F",
+          "F",
+          "F",
+          "F",
+          "F"
+        ],
+        "counts": {
+          "F": 20
+        },
+        "n": 20
+      },
+      "force": {
+        "s2": "On morning, they greet you with wagging tails.",
+        "letters": [
+          "P",
+          "P",
+          "P",
+          "P",
+          "P",
+          "P",
+          "P",
+          "P",
+          "P",
+          "P",
+          "P",
+          "P",
+          "P",
+          "P",
+          "P",
+          "P",
+          "P",
+          "P",
+          "P",
+          "E"
+        ],
+        "counts": {
+          "P": 19,
+          "E": 1
+        },
+        "n": 20
+      },
+      "placebo": {
+        "s2": "Every morning, they greet you with wagging tails.",
+        "letters": [
+          "F",
+          "F",
+          "F",
+          "F",
+          "F",
+          "F",
+          "F",
+          "F",
+          "F",
+          "F",
+          "F",
+          "F",
+          "F",
+          "F",
+          "F",
+          "F",
+          "F",
+          "F",
+          "F",
+          "F"
+        ],
+        "counts": {
+          "F": 20
+        },
+        "n": 20
+      }
+    },
+    "kl_force_vs_base": 2.1585,
+    "kl_placebo_vs_base": 0.0,
+    "readback_count": 19,
+    "readback_rate": 0.95,
+    "n_samples": 20
+  },
+  {
+    "trace_id": 1,
+    "start_letter": "H",
+    "chain_start": "H",
+    "correct_s2_letter": "I",
+    "force_letter": "D",
+    "exp_readback_s3": "E",
+    "exp_plan_s3": "J",
+    "s1": "Hiking is a great way to enjoy nature.",
+    "s2_base": "It allows you to explore different trails.",
+    "s2_force": "During allows you to explore different trails.",
+    "s2_placebo": "I allows you to explore different trails.",
+    "conditions": {
+      "base": {
+        "s2": "It allows you to explore different trails.",
+        "letters": [
+          "J",
+          "J",
+          "J",
+          "J",
+          "J",
+          "J",
+          "J",
+          "J",
+          "J",
+          "J",
+          "J",
+          "J",
+          "J",
+          "J",
+          "J",
+          "J",
+          "J",
+          "J",
+          "J",
+          "J"
+        ],
+        "counts": {
+          "J": 20
+        },
+        "n": 20
+      },
+      "force": {
+        "s2": "During allows you to explore different trails.",
+        "letters": [
+          "E",
+          "E",
+          "E",
+          "E",
+          "E",
+          "E",
+          "E",
+          "E",
+          "E",
+          "E",
+          "E",
+          "E",
+          "E",
+          "E",
+          "E",
+          "E",
+          "E",
+          "E",
+          "E",
+          "E"
+        ],
+        "counts": {
+          "E": 20
+        },
+        "n": 20
+      },
+      "placebo": {
+        "s2": "I allows you to explore different trails.",
+        "letters": [
+          "J",
+          "J",
+          "J",
+          "J",
+          "J",
+          "J",
+          "J",
+          "J",
+          "J",
+          "J",
+          "J",
+          "J",
+          "J",
+          "J",
+          "J",
+          "J",
+          "J",
+          "J",
+          "J",
+          "J"
+        ],
+        "counts": {
+          "J": 20
+        },
+        "n": 20
+      }
+    },
+    "kl_force_vs_base": 2.2506,
+    "kl_placebo_vs_base": 0.0,
+    "readback_count": 20,
+    "readback_rate": 1.0,
+    "n_samples": 20
+  },
+  {
+    "trace_id": 2,
+    "start_letter": "E",
+    "chain_start": "E",
+    "correct_s2_letter": "F",
+    "force_letter": "B",
+    "exp_readback_s3": "C",
+    "exp_plan_s3": "G",
+    "s1": "Every morning, I make coffee.",
+    "s2_base": "Feeling the warmth of the cup is comforting.",
+    "s2_force": "Breakfast the warmth of the cup is comforting.",
+    "s2_placebo": "First the warmth of the cup is comforting.",
+    "conditions": {
+      "base": {
+        "s2": "Feeling the warmth of the cup is comforting.",
+        "letters": [
+          "G",
+          "G",
+          "G",
+          "G",
+          "G",
+          "G",
+          "G",
+          "G",
+          "G",
+          "G",
+          "G",
+          "G",
+          "G",
+          "G",
+          "G",
+          "G",
+          "G",
+          "G",
+          "G",
+          "G"
+        ],
+        "counts": {
+          "G": 20
+        },
+        "n": 20
+      },
+      "force": {
+        "s2": "Breakfast the warmth of the cup is comforting.",
+        "letters": [
+          "C",
+          "C",
+          "C",
+          "C",
+          "C",
+          "G",
+          "C",
+          "C",
+          "C",
+          "C",
+          "C",
+          "C",
+          "C",
+          "C",
+          "F",
+          "C",
+          "C",
+          "C",
+          "C",
+          "C"
+        ],
+        "counts": {
+          "C": 18,
+          "G": 1,
+          "F": 1
+        },
+        "n": 20
+      },
+      "placebo": {
+        "s2": "First the warmth of the cup is comforting.",
+        "letters": [
+          "G",
+          "G",
+          "G",
+          "G",
+          "G",
+          "G",
+          "G",
+          "G",
+          "G",
+          "G",
+          "G",
+          "G",
+          "G",
+          "G",
+          "G",
+          "G",
+          "G",
+          "G",
+          "G",
+          "G"
+        ],
+        "counts": {
+          "G": 20
+        },
+        "n": 20
+      }
+    },
+    "kl_force_vs_base": 1.9554,
+    "kl_placebo_vs_base": 0.0,
+    "readback_count": 18,
+    "readback_rate": 0.9,
+    "n_samples": 20
+  },
+  {
+    "trace_id": 3,
+    "start_letter": "C",
+    "chain_start": "C",
+    "correct_s2_letter": "D",
+    "force_letter": "S",
+    "exp_readback_s3": "T",
+    "exp_plan_s3": "E",
+    "s1": "Cats are often seen lounging in sunny spots.",
+    "s2_base": "Dogs, on the other hand, love to play outside.",
+    "s2_force": "Sometimes on the other hand, love to play outside.",
+    "s2_placebo": "Driving on the other hand, love to play outside.",
+    "conditions": {
+      "base": {
+        "s2": "Dogs, on the other hand, love to play outside.",
+        "letters": [
+          "E",
+          "E",
+          "E",
+          "E",
+          "E",
+          "E",
+          "E",
+          "E",
+          "E",
+          "E",
+          "E",
+          "E",
+          "E",
+          "E",
+          "E",
+          "E",
+          "E",
+          "E",
+          "E",
+          "E"
+        ],
+        "counts": {
+          "E": 20
+        },
+        "n": 20
+      },
+      "force": {
+        "s2": "Sometimes on the other hand, love to play outside.",
+        "letters": [
+          "T",
+          "D",
+          "D",
+          "D",
+          "T",
+          "D",
+          "D",
+          "D",
+          "D",
+          "D",
+          "D",
+          "T",
+          "D",
+          "D",
+          "D",
+          "D",
+          "D",
+          "D",
+          "D",
+          "D"
+        ],
+        "counts": {
+          "T": 3,
+          "D": 17
+        },
+        "n": 20
+      },
+      "placebo": {
+        "s2": "Driving on the other hand, love to play outside.",
+        "letters": [
+          "E",
+          "E",
+          "E",
+          "E",
+          "E",
+          "E",
+          "E",
+          "E",
+          "E",
+          "E",
+          "E",
+          "E",
+          "E",
+          "E",
+          "E",
+          "E",
+          "E",
+          "E",
+          "E",
+          "E"
+        ],
+        "counts": {
+          "E": 20
+        },
+        "n": 20
+      }
+    },
+    "kl_force_vs_base": 2.0355,
+    "kl_placebo_vs_base": 0.0,
+    "readback_count": 3,
+    "readback_rate": 0.15,
+    "n_samples": 20
+  },
+  {
+    "trace_id": 4,
+    "start_letter": "B",
+    "chain_start": "B",
+    "correct_s2_letter": "C",
+    "force_letter": "G",
+    "exp_readback_s3": "H",
+    "exp_plan_s3": "D",
+    "s1": "Breakfast is the most important meal of the day.",
+    "s2_base": "Cooking eggs can be quite simple.",
+    "s2_force": "Going eggs can be quite simple.",
+    "s2_placebo": "Cooking eggs can be quite simple.",
+    "conditions": {
+      "base": {
+        "s2": "Cooking eggs can be quite simple.",
+        "letters": [
+          "D",
+          "D",
+          "D",
+          "D",
+          "D",
+          "D",
+          "D",
+          "D",
+          "D",
+          "D",
+          "D",
+          "D",
+          "D",
+          "D",
+          "D",
+          "D",
+          "D",
+          "D",
+          "D",
+          "D"
+        ],
+        "counts": {
+          "D": 20
+        },
+        "n": 20
+      },
+      "force": {
+        "s2": "Going eggs can be quite simple.",
+        "letters": [
+          "H",
+          "H",
+          "H",
+          "H",
+          "H",
+          "H",
+          "H",
+          "H",
+          "H",
+          "H",
+          "H",
+          "H",
+          "H",
+          "H",
+          "H",
+          "H",
+          "I",
+          "H",
+          "H",
+          "H"
+        ],
+        "counts": {
+          "H": 19,
+          "I": 1
+        },
+        "n": 20
+      },
+      "placebo": {
+        "s2": "Cooking eggs can be quite simple.",
+        "letters": [
+          "D",
+          "D",
+          "D",
+          "D",
+          "D",
+          "D",
+          "D",
+          "D",
+          "D",
+          "D",
+          "D",
+          "D",
+          "D",
+          "D",
+          "D",
+          "D",
+          "D",
+          "D",
+          "D",
+          "D"
+        ],
+        "counts": {
+          "D": 20
+        },
+        "n": 20
+      }
+    },
+    "kl_force_vs_base": 2.1585,
+    "kl_placebo_vs_base": 0.0,
+    "readback_count": 19,
+    "readback_rate": 0.95,
+    "n_samples": 20
+  },
+  {
+    "trace_id": 5,
+    "start_letter": "C",
+    "chain_start": "C",
+    "correct_s2_letter": "D",
+    "force_letter": "N",
+    "exp_readback_s3": "O",
+    "exp_plan_s3": "E",
+    "s1": "Cats often curl up in sunny spots.",
+    "s2_base": "Dogs like to chase after balls.",
+    "s2_force": "Normally like to chase after balls.",
+    "s2_placebo": "During like to chase after balls.",
+    "conditions": {
+      "base": {
+        "s2": "Dogs like to chase after balls.",
+        "letters": [
+          "E",
+          "E",
+          "E",
+          "E",
+          "E",
+          "E",
+          "E",
+          "E",
+          "E",
+          "E",
+          "E",
+          "E",
+          "E",
+          "E",
+          "E",
+          "E",
+          "E",
+          "E",
+          "E",
+          "E"
+        ],
+        "counts": {
+          "E": 20
+        },
+        "n": 20
+      },
+      "force": {
+        "s2": "Normally like to chase after balls.",
+        "letters": [
+          "O",
+          "O",
+          "O",
+          "O",
+          "O",
+          "D",
+          "O",
+          "O",
+          "D",
+          "O",
+          "O",
+          "O",
+          "O",
+          "O",
+          "O",
+          "O",
+          "O",
+          "O",
+          "P",
+          "O"
+        ],
+        "counts": {
+          "O": 17,
+          "D": 2,
+          "P": 1
+        },
+        "n": 20
+      },
+      "placebo": {
+        "s2": "During like to chase after balls.",
+        "letters": [
+          "E",
+          "E",
+          "E",
+          "E",
+          "E",
+          "E",
+          "E",
+          "E",
+          "E",
+          "E",
+          "E",
+          "E",
+          "E",
+          "E",
+          "E",
+          "E",
+          "E",
+          "E",
+          "E",
+          "E"
+        ],
+        "counts": {
+          "E": 20
+        },
+        "n": 20
+      }
+    },
+    "kl_force_vs_base": 2.001,
+    "kl_placebo_vs_base": 0.0,
+    "readback_count": 17,
+    "readback_rate": 0.85,
+    "n_samples": 20
+  },
+  {
+    "trace_id": 6,
+    "start_letter": "H",
+    "chain_start": "H",
+    "correct_s2_letter": "I",
+    "force_letter": "R",
+    "exp_readback_s3": "S",
+    "exp_plan_s3": "J",
+    "s1": "Hiking is a popular outdoor activity.",
+    "s2_base": "In many places, trails are well-marked.",
+    "s2_force": "Running many places, trails are well-marked.",
+    "s2_placebo": "I many places, trails are well-marked.",
+    "conditions": {
+      "base": {
+        "s2": "In many places, trails are well-marked.",
+        "letters": [
+          "J",
+          "J",
+          "J",
+          "J",
+          "J",
+          "J",
+          "J",
+          "J",
+          "J",
+          "J",
+          "J",
+          "J",
+          "J",
+          "J",
+          "J",
+          "J",
+          "J",
+          "J",
+          "J",
+          "J"
+        ],
+        "counts": {
+          "J": 20
+        },
+        "n": 20
+      },
+      "force": {
+        "s2": "Running many places, trails are well-marked.",
+        "letters": [
+          "S",
+          "S",
+          "S",
+          "S",
+          "S",
+          "S",
+          "S",
+          "S",
+          "S",
+          "S",
+          "S",
+          "S",
+          "S",
+          "S",
+          "S",
+          "S",
+          "S",
+          "S",
+          "S",
+          "S"
+        ],
+        "counts": {
+          "S": 20
+        },
+        "n": 20
+      },
+      "placebo": {
+        "s2": "I many places, trails are well-marked.",
+        "letters": [
+          "J",
+          "J",
+          "J",
+          "J",
+          "J",
+          "J",
+          "J",
+          "J",
+          "J",
+          "J",
+          "J",
+          "J",
+          "J",
+          "J",
+          "J",
+          "J",
+          "J",
+          "J",
+          "J",
+          "J"
+        ],
+        "counts": {
+          "J": 20
+        },
+        "n": 20
+      }
+    },
+    "kl_force_vs_base": 2.2506,
+    "kl_placebo_vs_base": 0.0,
+    "readback_count": 20,
+    "readback_rate": 1.0,
+    "n_samples": 20
+  },
+  {
+    "trace_id": 7,
+    "start_letter": "A",
+    "chain_start": "A",
+    "correct_s2_letter": "B",
+    "force_letter": "S",
+    "exp_readback_s3": "T",
+    "exp_plan_s3": "C",
+    "s1": "Apples are a popular fruit.",
+    "s2_base": "Bananas are also widely enjoyed.",
+    "s2_force": "Sometimes are also widely enjoyed.",
+    "s2_placebo": "Breakfast are also widely enjoyed.",
+    "conditions": {
+      "base": {
+        "s2": "Bananas are also widely enjoyed.",
+        "letters": [
+          "C",
+          "C",
+          "C",
+          "C",
+          "C",
+          "C",
+          "C",
+          "C",
+          "C",
+          "C",
+          "C",
+          "C",
+          "C",
+          "C",
+          "C",
+          "C",
+          "C",
+          "C",
+          "C",
+          "C"
+        ],
+        "counts": {
+          "C": 20
+        },
+        "n": 20
+      },
+      "force": {
+        "s2": "Sometimes are also widely enjoyed.",
+        "letters": [
+          "T",
+          "T",
+          "T",
+          "B",
+          "B",
+          "T",
+          "U",
+          "T",
+          "B",
+          "T",
+          "T",
+          "T",
+          "B",
+          "T",
+          "T",
+          "T",
+          "T",
+          "T",
+          "T",
+          "T"
+        ],
+        "counts": {
+          "T": 15,
+          "B": 4,
+          "U": 1
+        },
+        "n": 20
+      },
+      "placebo": {
+        "s2": "Breakfast are also widely enjoyed.",
+        "letters": [
+          "C",
+          "C",
+          "C",
+          "C",
+          "C",
+          "C",
+          "C",
+          "C",
+          "C",
+          "C",
+          "C",
+          "C",
+          "C",
+          "C",
+          "C",
+          "C",
+          "C",
+          "C",
+          "C",
+          "C"
+        ],
+        "counts": {
+          "C": 20
+        },
+        "n": 20
+      }
+    },
+    "kl_force_vs_base": 1.9062,
+    "kl_placebo_vs_base": 0.0,
+    "readback_count": 15,
+    "readback_rate": 0.75,
+    "n_samples": 20
+  },
+  {
+    "trace_id": 8,
+    "start_letter": "G",
+    "chain_start": "G",
+    "correct_s2_letter": "H",
+    "force_letter": "U",
+    "exp_readback_s3": "V",
+    "exp_plan_s3": "I",
+    "s1": "Gardening is a relaxing hobby.",
+    "s2_base": "Hoses are essential for watering plants.",
+    "s2_force": "Usually are essential for watering plants.",
+    "s2_placebo": "However are essential for watering plants.",
+    "conditions": {
+      "base": {
+        "s2": "Hoses are essential for watering plants.",
+        "letters": [
+          "I",
+          "I",
+          "I",
+          "I",
+          "I",
+          "I",
+          "I",
+          "I",
+          "I",
+          "I",
+          "I",
+          "I",
+          "I",
+          "I",
+          "I",
+          "I",
+          "I",
+          "I",
+          "I",
+          "I"
+        ],
+        "counts": {
+          "I": 20
+        },
+        "n": 20
+      },
+      "force": {
+        "s2": "Usually are essential for watering plants.",
+        "letters": [
+          "V",
+          "V",
+          "V",
+          "V",
+          "V",
+          "H",
+          "V",
+          "V",
+          "V",
+          "V",
+          "V",
+          "W",
+          "V",
+          "H",
+          "H",
+          "V",
+          "V",
+          "H",
+          "V",
+          "V"
+        ],
+        "counts": {
+          "V": 15,
+          "H": 4,
+          "W": 1
+        },
+        "n": 20
+      },
+      "placebo": {
+        "s2": "However are essential for watering plants.",
+        "letters": [
+          "I",
+          "I",
+          "I",
+          "I",
+          "I",
+          "I",
+          "I",
+          "I",
+          "I",
+          "I",
+          "I",
+          "I",
+          "I",
+          "I",
+          "I",
+          "I",
+          "I",
+          "I",
+          "I",
+          "I"
+        ],
+        "counts": {
+          "I": 20
+        },
+        "n": 20
+      }
+    },
+    "kl_force_vs_base": 1.9062,
+    "kl_placebo_vs_base": 0.0,
+    "readback_count": 15,
+    "readback_rate": 0.75,
+    "n_samples": 20
+  },
+  {
+    "trace_id": 9,
+    "start_letter": "S",
+    "chain_start": "S",
+    "correct_s2_letter": "T",
+    "force_letter": "D",
+    "exp_readback_s3": "E",
+    "exp_plan_s3": "U",
+    "s1": "Sunlight streamed through the window this morning.",
+    "s2_base": "The warmth felt comforting on my skin.",
+    "s2_force": "During warmth felt comforting on my skin.",
+    "s2_placebo": "The warmth felt comforting on my skin.",
+    "conditions": {
+      "base": {
+        "s2": "The warmth felt comforting on my skin.",
+        "letters": [
+          "U",
+          "U",
+          "U",
+          "U",
+          "U",
+          "U",
+          "U",
+          "U",
+          "U",
+          "U",
+          "U",
+          "U",
+          "U",
+          "U",
+          "U",
+          "U",
+          "U",
+          "U",
+          "U",
+          "U"
+        ],
+        "counts": {
+          "U": 20
+        },
+        "n": 20
+      },
+      "force": {
+        "s2": "During warmth felt comforting on my skin.",
+        "letters": [
+          "E",
+          "E",
+          "E",
+          "E",
+          "E",
+          "E",
+          "E",
+          "E",
+          "E",
+          "E",
+          "E",
+          "E",
+          "E",
+          "E",
+          "E",
+          "E",
+          "E",
+          "E",
+          "E",
+          "E"
+        ],
+        "counts": {
+          "E": 20
+        },
+        "n": 20
+      },
+      "placebo": {
+        "s2": "The warmth felt comforting on my skin.",
+        "letters": [
+          "U",
+          "U",
+          "U",
+          "U",
+          "U",
+          "U",
+          "U",
+          "U",
+          "U",
+          "U",
+          "U",
+          "U",
+          "U",
+          "U",
+          "U",
+          "U",
+          "U",
+          "U",
+          "U",
+          "U"
+        ],
+        "counts": {
+          "U": 20
+        },
+        "n": 20
+      }
+    },
+    "kl_force_vs_base": 2.2506,
+    "kl_placebo_vs_base": 0.0,
+    "readback_count": 20,
+    "readback_rate": 1.0,
+    "n_samples": 20
+  },
+  {
+    "trace_id": 10,
+    "start_letter": "T",
+    "chain_start": "T",
+    "correct_s2_letter": "U",
+    "force_letter": "M",
+    "exp_readback_s3": "N",
+    "exp_plan_s3": "V",
+    "s1": "The sun was shining brightly today.",
+    "s2_base": "Under the shade of a tree, I sat down.",
+    "s2_force": "Most the shade of a tree, I sat down.",
+    "s2_placebo": "Usually the shade of a tree, I sat down.",
+    "conditions": {
+      "base": {
+        "s2": "Under the shade of a tree, I sat down.",
+        "letters": [
+          "V",
+          "V",
+          "V",
+          "V",
+          "V",
+          "V",
+          "V",
+          "V",
+          "V",
+          "V",
+          "V",
+          "V",
+          "V",
+          "V",
+          "V",
+          "V",
+          "V",
+          "V",
+          "V",
+          "V"
+        ],
+        "counts": {
+          "V": 20
+        },
+        "n": 20
+      },
+      "force": {
+        "s2": "Most the shade of a tree, I sat down.",
+        "letters": [
+          "N",
+          "N",
+          "N",
+          "N",
+          "N",
+          "N",
+          "N",
+          "N",
+          "N",
+          "N",
+          "N",
+          "N",
+          "N",
+          "N",
+          "N",
+          "N",
+          "N",
+          "N",
+          "N",
+          "N"
+        ],
+        "counts": {
+          "N": 20
+        },
+        "n": 20
+      },
+      "placebo": {
+        "s2": "Usually the shade of a tree, I sat down.",
+        "letters": [
+          "V",
+          "V",
+          "V",
+          "V",
+          "V",
+          "V",
+          "V",
+          "V",
+          "V",
+          "V",
+          "V",
+          "V",
+          "V",
+          "V",
+          "V",
+          "V",
+          "V",
+          "V",
+          "V",
+          "V"
+        ],
+        "counts": {
+          "V": 20
+        },
+        "n": 20
+      }
+    },
+    "kl_force_vs_base": 2.2506,
+    "kl_placebo_vs_base": 0.0,
+    "readback_count": 20,
+    "readback_rate": 1.0,
+    "n_samples": 20
+  },
+  {
+    "trace_id": 11,
+    "start_letter": "L",
+    "chain_start": "L",
+    "correct_s2_letter": "M",
+    "force_letter": "A",
+    "exp_readback_s3": "B",
+    "exp_plan_s3": "N",
+    "s1": "Light rain began to fall softly.",
+    "s2_base": "Morning sun had been shining before.",
+    "s2_force": "Always sun had been shining before.",
+    "s2_placebo": "Most sun had been shining before.",
+    "conditions": {
+      "base": {
+        "s2": "Morning sun had been shining before.",
+        "letters": [
+          "N",
+          "N",
+          "N",
+          "N",
+          "N",
+          "N",
+          "N",
+          "N",
+          "N",
+          "N",
+          "N",
+          "N",
+          "N",
+          "N",
+          "N",
+          "N",
+          "N",
+          "N",
+          "N",
+          "N"
+        ],
+        "counts": {
+          "N": 20
+        },
+        "n": 20
+      },
+      "force": {
+        "s2": "Always sun had been shining before.",
+        "letters": [
+          "B",
+          "B",
+          "M",
+          "B",
+          "M",
+          "B",
+          "B",
+          "B",
+          "B",
+          "B",
+          "T",
+          "B",
+          "B",
+          "B",
+          "B",
+          "B",
+          "B",
+          "M",
+          "B",
+          "B"
+        ],
+        "counts": {
+          "B": 16,
+          "M": 3,
+          "T": 1
+        },
+        "n": 20
+      },
+      "placebo": {
+        "s2": "Most sun had been shining before.",
+        "letters": [
+          "N",
+          "N",
+          "N",
+          "N",
+          "N",
+          "N",
+          "N",
+          "N",
+          "N",
+          "N",
+          "N",
+          "N",
+          "N",
+          "N",
+          "N",
+          "N",
+          "N",
+          "N",
+          "N",
+          "N"
+        ],
+        "counts": {
+          "N": 20
+        },
+        "n": 20
+      }
+    },
+    "kl_force_vs_base": 1.9483,
+    "kl_placebo_vs_base": 0.0,
+    "readback_count": 16,
+    "readback_rate": 0.8,
+    "n_samples": 20
+  },
+  {
+    "trace_id": 12,
+    "start_letter": "F",
+    "chain_start": "F",
+    "correct_s2_letter": "G",
+    "force_letter": "O",
+    "exp_readback_s3": "P",
+    "exp_plan_s3": "H",
+    "s1": "Flowers bloom beautifully in spring.",
+    "s2_base": "Gardens become vibrant with colors.",
+    "s2_force": "Often become vibrant with colors.",
+    "s2_placebo": "Going become vibrant with colors.",
+    "conditions": {
+      "base": {
+        "s2": "Gardens become vibrant with colors.",
+        "letters": [
+          "H",
+          "H",
+          "H",
+          "H",
+          "H",
+          "H",
+          "H",
+          "H",
+          "H",
+          "H",
+          "H",
+          "H",
+          "H",
+          "H",
+          "H",
+          "H",
+          "H",
+          "H",
+          "H",
+          "H"
+        ],
+        "counts": {
+          "H": 20
+        },
+        "n": 20
+      },
+      "force": {
+        "s2": "Often become vibrant with colors.",
+        "letters": [
+          "P",
+          "P",
+          "D",
+          "P",
+          "P",
+          "P",
+          "P",
+          "P",
+          "P",
+          "P",
+          "P",
+          "P",
+          "G",
+          "P",
+          "P",
+          "P",
+          "P",
+          "P",
+          "P",
+          "P"
+        ],
+        "counts": {
+          "P": 18,
+          "D": 1,
+          "G": 1
+        },
+        "n": 20
+      },
+      "placebo": {
+        "s2": "Going become vibrant with colors.",
+        "letters": [
+          "H",
+          "H",
+          "H",
+          "H",
+          "H",
+          "H",
+          "H",
+          "H",
+          "H",
+          "H",
+          "H",
+          "H",
+          "H",
+          "H",
+          "H",
+          "H",
+          "H",
+          "H",
+          "H",
+          "H"
+        ],
+        "counts": {
+          "H": 20
+        },
+        "n": 20
+      }
+    },
+    "kl_force_vs_base": 2.0679,
+    "kl_placebo_vs_base": 0.0,
+    "readback_count": 18,
+    "readback_rate": 0.9,
+    "n_samples": 20
+  },
+  {
+    "trace_id": 13,
+    "start_letter": "N",
+    "chain_start": "N",
+    "correct_s2_letter": "O",
+    "force_letter": "E",
+    "exp_readback_s3": "F",
+    "exp_plan_s3": "P",
+    "s1": "New plants need sunlight to grow.",
+    "s2_base": "Often, they also require regular watering.",
+    "s2_force": "Every they also require regular watering.",
+    "s2_placebo": "Often they also require regular watering.",
+    "conditions": {
+      "base": {
+        "s2": "Often, they also require regular watering.",
+        "letters": [
+          "P",
+          "P",
+          "P",
+          "P",
+          "P",
+          "P",
+          "P",
+          "P",
+          "P",
+          "P",
+          "P",
+          "P",
+          "P",
+          "P",
+          "P",
+          "P",
+          "P",
+          "P",
+          "P",
+          "P"
+        ],
+        "counts": {
+          "P": 20
+        },
+        "n": 20
+      },
+      "force": {
+        "s2": "Every they also require regular watering.",
+        "letters": [
+          "F",
+          "F",
+          "F",
+          "F",
+          "F",
+          "F",
+          "O",
+          "F",
+          "F",
+          "F",
+          "F",
+          "F",
+          "F",
+          "F",
+          "F",
+          "F",
+          "W",
+          "F",
+          "F",
+          "F"
+        ],
+        "counts": {
+          "F": 18,
+          "O": 1,
+          "W": 1
+        },
+        "n": 20
+      },
+      "placebo": {
+        "s2": "Often they also require regular watering.",
+        "letters": [
+          "P",
+          "P",
+          "P",
+          "P",
+          "P",
+          "P",
+          "P",
+          "P",
+          "P",
+          "P",
+          "P",
+          "P",
+          "P",
+          "P",
+          "P",
+          "P",
+          "P",
+          "P",
+          "P",
+          "P"
+        ],
+        "counts": {
+          "P": 20
+        },
+        "n": 20
+      }
+    },
+    "kl_force_vs_base": 2.0679,
+    "kl_placebo_vs_base": 0.0,
+    "readback_count": 18,
+    "readback_rate": 0.9,
+    "n_samples": 20
+  },
+  {
+    "trace_id": 14,
+    "start_letter": "E",
+    "chain_start": "E",
+    "correct_s2_letter": "F",
+    "force_letter": "M",
+    "exp_readback_s3": "N",
+    "exp_plan_s3": "G",
+    "s1": "Every morning, I enjoy a cup of coffee.",
+    "s2_base": "Freshly brewed, it fills the kitchen with a rich aroma.",
+    "s2_force": "Most brewed, it fills the kitchen with a rich aroma.",
+    "s2_placebo": "Friends brewed, it fills the kitchen with a rich aroma.",
+    "conditions": {
+      "base": {
+        "s2": "Freshly brewed, it fills the kitchen with a rich aroma.",
+        "letters": [
+          "G",
+          "G",
+          "G",
+          "G",
+          "G",
+          "G",
+          "G",
+          "G",
+          "G",
+          "G",
+          "G",
+          "G",
+          "G",
+          "G",
+          "G",
+          "G",
+          "G",
+          "G",
+          "G",
+          "G"
+        ],
+        "counts": {
+          "G": 20
+        },
+        "n": 20
+      },
+      "force": {
+        "s2": "Most brewed, it fills the kitchen with a rich aroma.",
+        "letters": [
+          "N",
+          "N",
+          "N",
+          "N",
+          "N",
+          "N",
+          "N",
+          "N",
+          "N",
+          "N",
+          "N",
+          "N",
+          "N",
+          "N",
+          "N",
+          "N",
+          "N",
+          "N",
+          "N",
+          "N"
+        ],
+        "counts": {
+          "N": 20
+        },
+        "n": 20
+      },
+      "placebo": {
+        "s2": "Friends brewed, it fills the kitchen with a rich aroma.",
+        "letters": [
+          "G",
+          "G",
+          "G",
+          "G",
+          "G",
+          "G",
+          "G",
+          "G",
+          "G",
+          "G",
+          "G",
+          "G",
+          "G",
+          "G",
+          "G",
+          "G",
+          "G",
+          "G",
+          "G",
+          "G"
+        ],
+        "counts": {
+          "G": 20
+        },
+        "n": 20
+      }
+    },
+    "kl_force_vs_base": 2.2506,
+    "kl_placebo_vs_base": 0.0,
+    "readback_count": 20,
+    "readback_rate": 1.0,
+    "n_samples": 20
+  },
+  {
+    "trace_id": 15,
+    "start_letter": "N",
+    "chain_start": "N",
+    "correct_s2_letter": "O",
+    "force_letter": "B",
+    "exp_readback_s3": "C",
+    "exp_plan_s3": "P",
+    "s1": "New recipes are fun to try.",
+    "s2_base": "Often, they bring a fresh taste to meals.",
+    "s2_force": "Breakfast they bring a fresh taste to meals.",
+    "s2_placebo": "Often they bring a fresh taste to meals.",
+    "conditions": {
+      "base": {
+        "s2": "Often, they bring a fresh taste to meals.",
+        "letters": [
+          "P",
+          "P",
+          "P",
+          "P",
+          "P",
+          "P",
+          "P",
+          "P",
+          "P",
+          "P",
+          "P",
+          "P",
+          "P",
+          "P",
+          "P",
+          "P",
+          "P",
+          "P",
+          "P",
+          "P"
+        ],
+        "counts": {
+          "P": 20
+        },
+        "n": 20
+      },
+      "force": {
+        "s2": "Breakfast they bring a fresh taste to meals.",
+        "letters": [
+          "C",
+          "C",
+          "C",
+          "C",
+          "C",
+          "C",
+          "C",
+          "C",
+          "C",
+          "C",
+          "C",
+          "C",
+          "C",
+          "C",
+          "C",
+          "C",
+          "C",
+          "C",
+          "C",
+          "S"
+        ],
+        "counts": {
+          "C": 19,
+          "S": 1
+        },
+        "n": 20
+      },
+      "placebo": {
+        "s2": "Often they bring a fresh taste to meals.",
+        "letters": [
+          "P",
+          "P",
+          "P",
+          "P",
+          "P",
+          "P",
+          "P",
+          "P",
+          "P",
+          "P",
+          "P",
+          "P",
+          "P",
+          "P",
+          "P",
+          "P",
+          "P",
+          "P",
+          "P",
+          "P"
+        ],
+        "counts": {
+          "P": 20
+        },
+        "n": 20
+      }
+    },
+    "kl_force_vs_base": 2.1585,
+    "kl_placebo_vs_base": 0.0,
+    "readback_count": 19,
+    "readback_rate": 0.95,
+    "n_samples": 20
+  },
+  {
+    "trace_id": 16,
+    "start_letter": "C",
+    "chain_start": "C",
+    "correct_s2_letter": "D",
+    "force_letter": "S",
+    "exp_readback_s3": "T",
+    "exp_plan_s3": "E",
+    "s1": "Cats make wonderful pets.",
+    "s2_base": "Dogs are also very loyal.",
+    "s2_force": "Sometimes are also very loyal.",
+    "s2_placebo": "During are also very loyal.",
+    "conditions": {
+      "base": {
+        "s2": "Dogs are also very loyal.",
+        "letters": [
+          "E",
+          "E",
+          "E",
+          "E",
+          "E",
+          "E",
+          "E",
+          "E",
+          "E",
+          "E",
+          "E",
+          "E",
+          "E",
+          "E",
+          "E",
+          "E",
+          "E",
+          "E",
+          "E",
+          "E"
+        ],
+        "counts": {
+          "E": 20
+        },
+        "n": 20
+      },
+      "force": {
+        "s2": "Sometimes are also very loyal.",
+        "letters": [
+          "D",
+          "D",
+          "D",
+          "U",
+          "T",
+          "D",
+          "T",
+          "D",
+          "T",
+          "T",
+          "D",
+          "D",
+          "T",
+          "D",
+          "D",
+          "T",
+          "T",
+          "D",
+          "D",
+          "D"
+        ],
+        "counts": {
+          "D": 12,
+          "U": 1,
+          "T": 7
+        },
+        "n": 20
+      },
+      "placebo": {
+        "s2": "During are also very loyal.",
+        "letters": [
+          "E",
+          "E",
+          "E",
+          "E",
+          "E",
+          "E",
+          "E",
+          "E",
+          "E",
+          "E",
+          "E",
+          "E",
+          "E",
+          "E",
+          "E",
+          "E",
+          "E",
+          "E",
+          "E",
+          "E"
+        ],
+        "counts": {
+          "E": 20
+        },
+        "n": 20
+      }
+    },
+    "kl_force_vs_base": 1.8284,
+    "kl_placebo_vs_base": 0.0,
+    "readback_count": 7,
+    "readback_rate": 0.35,
+    "n_samples": 20
+  },
+  {
+    "trace_id": 17,
+    "start_letter": "D",
+    "chain_start": "D",
+    "correct_s2_letter": "E",
+    "force_letter": "R",
+    "exp_readback_s3": "S",
+    "exp_plan_s3": "F",
+    "s1": "Dogs are great companions.",
+    "s2_base": "Every morning, they greet you warmly.",
+    "s2_force": "Reading morning, they greet you warmly.",
+    "s2_placebo": "Every morning, they greet you warmly.",
+    "conditions": {
+      "base": {
+        "s2": "Every morning, they greet you warmly.",
+        "letters": [
+          "F",
+          "F",
+          "F",
+          "F",
+          "F",
+          "F",
+          "F",
+          "F",
+          "F",
+          "F",
+          "F",
+          "F",
+          "F",
+          "F",
+          "F",
+          "F",
+          "F",
+          "F",
+          "F",
+          "F"
+        ],
+        "counts": {
+          "F": 20
+        },
+        "n": 20
+      },
+      "force": {
+        "s2": "Reading morning, they greet you warmly.",
+        "letters": [
+          "E",
+          "E",
+          "E",
+          "E",
+          "E",
+          "E",
+          "E",
+          "E",
+          "E",
+          "E",
+          "E",
+          "E",
+          "E",
+          "E",
+          "E",
+          "E",
+          "E",
+          "E",
+          "E",
+          "E"
+        ],
+        "counts": {
+          "E": 20
+        },
+        "n": 20
+      },
+      "placebo": {
+        "s2": "Every morning, they greet you warmly.",
+        "letters": [
+          "F",
+          "F",
+          "F",
+          "F",
+          "F",
+          "F",
+          "H",
+          "F",
+          "F",
+          "F",
+          "F",
+          "F",
+          "F",
+          "F",
+          "F",
+          "F",
+          "F",
+          "F",
+          "F",
+          "F"
+        ],
+        "counts": {
+          "F": 19,
+          "H": 1
+        },
+        "n": 20
+      }
+    },
+    "kl_force_vs_base": 2.2506,
+    "kl_placebo_vs_base": 0.0204,
+    "readback_count": 0,
+    "readback_rate": 0.0,
+    "n_samples": 20
+  },
+  {
+    "trace_id": 18,
+    "start_letter": "O",
+    "chain_start": "O",
+    "correct_s2_letter": "P",
+    "force_letter": "T",
+    "exp_readback_s3": "U",
+    "exp_plan_s3": "Q",
+    "s1": "Orange juice is my favorite morning drink.",
+    "s2_base": "Pancakes with syrup often accompany it.",
+    "s2_force": "Today with syrup often accompany it.",
+    "s2_placebo": "People with syrup often accompany it.",
+    "conditions": {
+      "base": {
+        "s2": "Pancakes with syrup often accompany it.",
+        "letters": [
+          "Q",
+          "Q",
+          "Q",
+          "Q",
+          "Q",
+          "Q",
+          "Q",
+          "Q",
+          "Q",
+          "Q",
+          "Q",
+          "Q",
+          "Q",
+          "Q",
+          "Q",
+          "Q",
+          "Q",
+          "Q",
+          "Q",
+          "Q"
+        ],
+        "counts": {
+          "Q": 20
+        },
+        "n": 20
+      },
+      "force": {
+        "s2": "Today with syrup often accompany it.",
+        "letters": [
+          "U",
+          "U",
+          "U",
+          "U",
+          "U",
+          "U",
+          "U",
+          "U",
+          "U",
+          "U",
+          "U",
+          "U",
+          "U",
+          "U",
+          "U",
+          "U",
+          "U",
+          "U",
+          "U",
+          "U"
+        ],
+        "counts": {
+          "U": 20
+        },
+        "n": 20
+      },
+      "placebo": {
+        "s2": "People with syrup often accompany it.",
+        "letters": [
+          "Q",
+          "Q",
+          "Q",
+          "Q",
+          "Q",
+          "Q",
+          "Q",
+          "Q",
+          "Q",
+          "Q",
+          "Q",
+          "Q",
+          "Q",
+          "Q",
+          "Q",
+          "Q",
+          "Q",
+          "Q",
+          "Q",
+          "Q"
+        ],
+        "counts": {
+          "Q": 20
+        },
+        "n": 20
+      }
+    },
+    "kl_force_vs_base": 2.2506,
+    "kl_placebo_vs_base": 0.0,
+    "readback_count": 20,
+    "readback_rate": 1.0,
+    "n_samples": 20
+  },
+  {
+    "trace_id": 19,
+    "start_letter": "L",
+    "chain_start": "L",
+    "correct_s2_letter": "M",
+    "force_letter": "A",
+    "exp_readback_s3": "B",
+    "exp_plan_s3": "N",
+    "s1": "Lemons are great in tea.",
+    "s2_base": "Most people enjoy their tangy flavor.",
+    "s2_force": "Always people enjoy their tangy flavor.",
+    "s2_placebo": "Many people enjoy their tangy flavor.",
+    "conditions": {
+      "base": {
+        "s2": "Most people enjoy their tangy flavor.",
+        "letters": [
+          "N",
+          "N",
+          "N",
+          "N",
+          "N",
+          "N",
+          "N",
+          "N",
+          "N",
+          "N",
+          "N",
+          "N",
+          "N",
+          "N",
+          "N",
+          "N",
+          "N",
+          "N",
+          "N",
+          "N"
+        ],
+        "counts": {
+          "N": 20
+        },
+        "n": 20
+      },
+      "force": {
+        "s2": "Always people enjoy their tangy flavor.",
+        "letters": [
+          "B",
+          "B",
+          "B",
+          "B",
+          "B",
+          "B",
+          "B",
+          "B",
+          "B",
+          "B",
+          "B",
+          "B",
+          "B",
+          "B",
+          "B",
+          "B",
+          "B",
+          "B",
+          "B",
+          "B"
+        ],
+        "counts": {
+          "B": 20
+        },
+        "n": 20
+      },
+      "placebo": {
+        "s2": "Many people enjoy their tangy flavor.",
+        "letters": [
+          "N",
+          "N",
+          "N",
+          "N",
+          "N",
+          "N",
+          "N",
+          "N",
+          "N",
+          "N",
+          "N",
+          "N",
+          "N",
+          "N",
+          "N",
+          "N",
+          "N",
+          "N",
+          "N",
+          "N"
+        ],
+        "counts": {
+          "N": 20
+        },
+        "n": 20
+      }
+    },
+    "kl_force_vs_base": 2.2506,
+    "kl_placebo_vs_base": 0.0,
+    "readback_count": 20,
+    "readback_rate": 1.0,
+    "n_samples": 20
+  }
+]

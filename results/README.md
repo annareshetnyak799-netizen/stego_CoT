@@ -633,3 +633,156 @@ stego vs control: diff=−0.00092, t=−4.2, p=2.9e-5 (significant but 1.4% of s
 **Answer to weekly question (mentor, June 15):** Vectors do "sway towards the constrained letter" starting at L16, but equally for hidden and visible constraints. The swaying is structural, not stego-specific. Logit lens cannot serve as a steganography detector.
 
 **Files:** `exp13c/exp13c_summary.json`, `exp13c/exp13c_logit_lens.png`, `exp13c/exp13c_stego_minus_control.png`
+
+---
+
+## exp09c - 2026-06-22
+
+**Question:** When a word mid-sequence is replaced (changing the starting letter by ≥ 4 alphabet positions), does GPT-4o continue the chain from the *patched* letter (text-following) or from the *originally planned* letter (plan-following)?
+
+**Design:** Thought-Anchors-style text-level patching applied mid-sequence in an alphabet+1 chain. A valid 6-sentence chain is generated; sentence K (patch position) is modified by replacing its first word. Three trial types per chain × position:
+- **FORCED** — first word replaced with a word starting with a wrong letter (≥ 4 positions away in the alphabet)
+- **IDENTITY** — sentence K re-fed unchanged (control: editing artefact alone does not perturb)
+- **WORD\_SWAP** — first word replaced with a different word starting with the *same* correct letter (control: wording change without letter change)
+
+Outcome for K+1 is labelled **text** (follows patched letter's successor), **plan** (follows original planned letter), or **neither** (chain abandoned or wrong).
+
+**Setup:**
+- Model: GPT-4o (no thinking mode; temperature 0 for continuation)
+- Rule: alphabet+1 (each sentence starts with the next alphabet letter)
+- N chains: 20 (start letter drawn from 16 "safe" letters; JKQWXZ excluded)
+- Patch positions K: 2, 3, 4 (sweeping mid-chain positions)
+- Total trials per type: 60 (20 chains × 3 positions)
+- Cascade: outcome also recorded for position K+2
+
+**Results:**
+
+| Trial type | text | plan | neither | p (binomial, text > 0.5) |
+|---|---|---|---|---|
+| FORCED     | 49/60 (81.7%) | 1/60 (1.7%) | 10/60 (16.7%) | < 0.000001 ✓ |
+| IDENTITY   | 60/60 (100%)  | 0/60        | 0/60          | — |
+| WORD\_SWAP | 60/60 (100%)  | 0/60        | 0/60          | — |
+
+FORCED by patch position (K+1):
+
+| K | text | n |
+|---|---|---|
+| 2 | 17 (85%) | 20 |
+| 3 | 16 (80%) | 20 |
+| 4 | 16 (80%) | 20 |
+
+Cascade K+2 (FORCED): text = 49/60 (81.7%), plan = 1/60 — the text-following behaviour propagates one step further with the same rate.
+
+**Conclusion:** Mid-sequence word replacement causally determines the next letter in the chain. GPT-4o reads its own generated text and applies the alphabet+1 rule to the patched letter rather than executing a pre-planned sequence. The IDENTITY and WORD\_SWAP controls show near-zero perturbation (100% text continuation), confirming that the effect is driven by the letter change, not by editing artefacts. The 16.7% "neither" rate in FORCED conditions reflects occasional chain abandonment (the model breaks task framing), not plan-following. The cascade result (K+2 also follows the patched branch at 81.7%) indicates that the error propagates forward — once the patched letter is accepted, subsequent steps continue from it.
+
+This extends exp09b (single-sentence patch on S1) to mid-chain positions (K = 2, 3, 4), confirming the causal role of generated text across the full chain length.
+
+**Files:** `exp09c/exp09c_results.json`
+
+---
+
+## exp09d - 2026-06-22
+
+**Question:** Can the text-following effect (exp09b/exp09c) be quantified as a full conditional letter distribution, and is it distinguishable from chance (placebo) via KL divergence?
+
+**Design:** Prefill-based distributional patching. For each trace:
+1. A valid 6-sentence alphabet+1 chain is generated.
+2. Sentence S2 is replaced with a forced (wrong-letter) or placebo (same-letter, different-word) variant.
+3. The model is asked to continue from S3 onward, with S1 + S2\_variant as a prefill in the assistant turn.
+4. S3 is sampled N\_SAMPLES times (temperature 0.9) per condition.
+5. KL divergence from the forced/placebo letter distribution to the base (unmodified) distribution is computed.
+
+Three conditions per trace: **base** (S2 unchanged), **force** (S2 first word → wrong letter ≥ 4 away), **placebo** (S2 first word → different word, same letter).
+
+Read-back rate = fraction of FORCE samples where S3 starts with next\_letter(force\_letter) rather than next\_letter(correct\_letter).
+
+**Setup:**
+- Model: GPT-4o (temperature 0.9 for sampling)
+- Rule: alphabet+1; 16 safe letters; force letter ≥ 4 positions away
+- N traces: 20; N samples per trace: 20; total FORCE samples: 400
+- KL smoothing: Laplace (ε = 0.5) over all 26 letters
+- Seed: 42
+
+**Results:**
+
+| Metric | Value |
+|---|---|
+| Valid traces | 20 / 20 |
+| Read-back rate (FORCE, mean ± std) | 81.0% ± 28.7% (min 0%, max 100%) |
+| KL force vs base (mean ± std)   | 2.1099 ± 0.1412 |
+| KL placebo vs base (mean ± std) | 0.0010 ± 0.0044 |
+
+Across all 400 FORCE samples:
+
+| Outcome | Count | % |
+|---|---|---|
+| Read-back (follows patched letter) | 324 | 81.0% |
+| Plan (follows original letter)     | 1   | 0.2% |
+| Neither                            | 75  | 18.8% |
+
+Binomial test (read-back > plan, n\_clear = 325): p < 0.000001.
+
+KL\_force / KL\_placebo ratio: 2110 × — placebo is negligibly different from base; forced patching shifts the letter distribution by more than 2 nats.
+
+**Anomalous trace (start=D, 0% read-back):** force letter was R → expected S3 starting with S, but the model produced E (= next\_letter(D)) in all 20 samples. The model appears to re-anchor to the chain start letter (D) and resume the baseline sequence, bypassing both the force and the plan. This is a systematic prompt-interpretation artefact (model counts from the start rather than reading S2), not random noise. One out of 20 traces; does not affect the aggregate result.
+
+**Conclusion:** The letter distribution of S3 shifts dramatically when S2's first letter is changed (KL = 2.11) and is unchanged when only the wording changes (KL = 0.001). This 2100× ratio constitutes strong quantitative evidence that the first letter of each generated sentence is causally determined by the first letter of the preceding sentence, consistent with text-following (read-back) rather than plan-following (prompt-only reasoning).
+
+Together with exp09b (100% text-following, patching S1) and exp09c (81.7%, mid-chain patching), exp09d confirms that acrostic encoding positions are causally load-bearing across three complementary methodologies: discrete outcome labelling, mid-chain position sweep, and full distributional KL measurement.
+
+**Files:** `exp09d/exp09d_results.json`, `exp09d/figures/`
+
+---
+
+## exp13d - 2026-06-26
+
+**Question (mentor, meeting 2026-06-15):** Does a paragraph-start token K attend more to (a) previous paragraph-start tokens {1..K-1} and (b) prompt tokens that specify the letter scheme, in stego vs open vs control conditions?
+
+**Motivation:** The mentor's narrowed attention hypothesis: if the model is doing constrained letter generation, it must consult (a) the preceding constrained letters to maintain the sequence and (b) the prompt scheme to know the target letter. If stego > baseline on either metric, this implicates these token sets in the encoding mechanism. If stego ≈ control, the effect is structural (driven by any letter constraint, not by its hiddenness).
+
+This experiment refines exp04–exp06: instead of averaging over all heads and measuring elevation relative to mid-sentence positions, it measures directed attention from paragraph-start token K to specific source sets, on the natural acrostic dataset (exp11, no X- markers).
+
+**Setup:**
+- Data: `exp11/exp11_pairs_with_control.json`, 604 triplets (stego / open / control), 0 skipped
+- Model: Llama-3.1-8B-Instruct, `output_attentions=True`, `attn_implementation='eager'`
+- Source set 1 (prev\_starts): positions of previous paragraph-start tokens {sent\_positions[0..K-1]}
+- Source set 2 (scheme): prompt token span encoding the letter constraint (payload + instruction)
+- Metric: mean attention weight from position K to source set, averaged over all heads and pairs
+
+**Results:**
+
+Attention to previous paragraph-start tokens:
+
+| Comparison | Mean diff | t | p |
+|---|---|---|---|
+| stego vs open    | −0.00395 | −22.24 | ≈ 0 |
+| stego vs control | +0.00023 | +2.23  | 0.026 |
+| control vs open  | −0.00418 | −24.30 | ≈ 0 |
+
+Attention to scheme tokens:
+
+| Comparison | Mean diff | t | p |
+|---|---|---|---|
+| stego vs control | −0.00066 | −12.16 | ≈ 0 |
+
+Peak attention weight per layer (prev\_starts):
+
+| Condition | Peak layer | Peak value |
+|---|---|---|
+| stego   | 15 | 0.0677 |
+| control | 12 | 0.0664 |
+| open    | 16 | 0.0574 |
+
+Peak attention to scheme tokens: layer 14 for both stego (0.1472) and control (0.1438).
+
+**Interpretation of direction:**
+
+The stego < open result for prev\_starts (diff = −0.004) is counter-intuitive but coherent: unconstrained (open) tokens attend more to previous paragraph-start positions because they must maintain topic continuity without a scheme — paragraph-start tokens are their primary contextual anchors. Constrained (stego, control) tokens already know the target letter from the prompt scheme, so they rely less on reading back previous constrained positions.
+
+Both the "prev\_starts" and "scheme" metrics show stego ≈ control: the stego–control differences are statistically detectable (t = 2.23 / −12.16) but effects are trivially small relative to the stego–open gap (stego–control diff is 5.8% / 16.7% of the stego–open gap for the respective metrics).
+
+**Conclusion:** The directed attention pattern is a structural property of letter-constrained generation. Neither the attention back to previous paragraph-start positions nor the attention to the prompt's letter-scheme tokens can distinguish steganographic from openly-constrained letter generation. This replicates the finding of exp06 (attention elevation), exp08b (log P), exp10b (entropy/within-KL), and exp13b/c (entropy, within-KL, logit lens) on a fourth independent metric and the natural acrostic dataset.
+
+**Overall mechanistic conclusion (exp04–exp13d):** Across six independent mechanistic signals — attention elevation, head specialisation, log P z-score, attention entropy, within-KL divergence, logit-lens P(letter), and directed attention from constrained positions — no signal distinguishes a hidden letter constraint from a visible one. All signals measure "the model is following a letter rule," not "the model is hiding a message."
+
+**Files:** `exp13d/exp13d_summary.json`, `exp13d/exp13d_raw.json`, `exp13d/exp13d_prev_starts.png`, `exp13d/exp13d_scheme.png`

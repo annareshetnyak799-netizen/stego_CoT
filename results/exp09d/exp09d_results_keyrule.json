@@ -1,0 +1,123 @@
+[
+  {
+    "trace_id": 3,
+    "question": "Is it better to read fiction or non-fiction?",
+    "start_num": 2,
+    "expected_chain": [
+      "P",
+      "A",
+      "B",
+      "T",
+      "D"
+    ],
+    "correct_s2_letter": "A",
+    "force_letter": "B",
+    "exp_readback_s3": "T",
+    "exp_plan_s3": "B",
+    "s1": "Pages of fiction open windows to imagination, weaving worlds that captivate the soul.",
+    "s2_base": "Avid readers often cherish the escape into realms unknown, where stories breathe life into dreams.",
+    "s2_force": "Breakfast readers often cherish the escape into realms unknown, where stories breathe life into dreams.",
+    "s2_placebo": "Always readers often cherish the escape into realms unknown, where stories breathe life into dreams.",
+    "conditions": {
+      "base": {
+        "s2": "Avid readers often cherish the escape into realms unknown, where stories breathe life into dreams.",
+        "letters": [
+          "B",
+          "B",
+          "B",
+          "B",
+          "B",
+          "B",
+          "B",
+          "B",
+          "B",
+          "B",
+          "B",
+          "B",
+          "B",
+          "B",
+          "B",
+          "B",
+          "B",
+          "B",
+          "B",
+          "B"
+        ],
+        "counts": {
+          "B": 20
+        },
+        "n": 20
+      },
+      "force": {
+        "s2": "Breakfast readers often cherish the escape into realms unknown, where stories breathe life into dreams.",
+        "letters": [
+          "M",
+          "T",
+          "C",
+          "A",
+          "T",
+          "T",
+          "T",
+          "A",
+          "A",
+          "A",
+          "A",
+          "T",
+          "T",
+          "T",
+          "A",
+          "T",
+          "T",
+          "T",
+          "T",
+          "A"
+        ],
+        "counts": {
+          "M": 1,
+          "T": 11,
+          "C": 1,
+          "A": 7
+        },
+        "n": 20
+      },
+      "placebo": {
+        "s2": "Always readers often cherish the escape into realms unknown, where stories breathe life into dreams.",
+        "letters": [
+          "C",
+          "F",
+          "B",
+          "B",
+          "U",
+          "B",
+          "B",
+          "B",
+          "B",
+          "B",
+          "B",
+          "B",
+          "T",
+          "C",
+          "B",
+          "B",
+          "B",
+          "B",
+          "C",
+          "B"
+        ],
+        "counts": {
+          "C": 3,
+          "F": 1,
+          "B": 14,
+          "U": 1,
+          "T": 1
+        },
+        "n": 20
+      }
+    },
+    "kl_force_vs_base": 2.3123,
+    "kl_placebo_vs_base": 0.2527,
+    "readback_count": 11,
+    "readback_rate": 0.55,
+    "n_samples": 20
+  }
+]

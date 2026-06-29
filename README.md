@@ -12,7 +12,7 @@ CoT monitoring is a foundational AI safety technique: if a model must show its r
 
 ## Approach
 
-Contrastive design: same task, two conditions — open reasoning vs. stego-instructed reasoning (acrostic: first letter of each CoT step encodes a payload word). All main experiments run on Llama-3.1-8B-Instruct; data collected in exp01 (303 contrastive pairs, 87% fidelity).
+Contrastive design: same task, two conditions — open reasoning vs. stego-instructed reasoning (acrostic: first letter of each CoT paragraph encodes a payload word). All mechanistic experiments run on Llama-3.1-8B-Instruct; behavioral patching experiments on GPT-4o.
 
 **Phase 1 — Activation probes (exp00–exp03):** linear probes on residual stream at pre-generation, mean-CoT, and post-generation readout points. Blocked by three compounding confounds (prompt, generation, weight). Established confound taxonomy; probe AUROC reflects prompt token differences, not steganographic computation.
 
@@ -20,29 +20,48 @@ Contrastive design: same task, two conditions — open reasoning vs. stego-instr
 
 **Phase 3 — Log-probability calibration (exp08–exp08b):** teacher-forcing log P at sentence-start positions. Found large opposing anomaly: within-sequence z-score is +0.637 in stego vs −0.470 in open (t=10, p≈0). Open acrostic control (exp08b) produced z=+0.514, nearly identical to stego — the same structural falsifier applies.
 
+**Phase 4 — Behavioral text patching on frontier models (exp09b–exp09d):** tested whether GPT-4o uses its own generated text (text-following) or an internal prompt-derived plan (plan-following) when continuing an acrostic chain. Mid-sequence word replacement (changing the first letter): 81.7% of continuations follow the patched letter, 2% follow the original plan, 17% abandon the chain. KL(forced ‖ base) = 2.11 vs KL(placebo ‖ base) = 0.001 (2100× ratio). Confirmed across three independent methodologies (discrete outcome labelling, mid-chain sweep, distributional KL).
+
+**Phase 5 — Observational mechanistic analysis on natural acrostics (exp10–exp13d):** generated a clean natural-format dataset (exp11, 604 triplets, no X- markers). Measured attention entropy, within-KL, logit-lens P(letter), and directed attention from paragraph-start positions to scheme tokens. All six metrics show stego ≈ control — the constraint-following mechanism is identical whether the constraint is hidden or visible. Logit-lens commitment builds from L16, crystallises at L30–L31 (P = 0.968 for both stego and control vs 0.011 for open).
+
+**Phase 6 — Causal mechanistic validation (exp14):** five causal interventions via monkey-patching `eager_attention_forward`. Source hierarchy (Cohen dz): full_scheme (12) ≫ letters_only (3.4) > prev_starts (1.2) ≫ prev_token (0.1, n.s.). The model reads the required letter directly from the explicit letter tokens in the prompt scheme. The immediately preceding token is causally irrelevant (p = 0.141). Stego ≈ control across all 12 conditions — seventh independent confirmation of structural mechanism.
+
 ## Repository Structure
 
 ```
 stego_CoT/
 ├── notebooks/
-│   ├── exp00_pipeline_sanity_check.ipynb   # activation probe pipeline
-│   ├── exp02b_probe_valid_pairs.ipynb       # linear probe on exp01 data
-│   ├── exp03_model_organism.ipynb           # LoRA model organism
-│   ├── exp04_attention_elevation.ipynb      # attention at acrostic positions
-│   ├── exp04b_acrostic_vs_control_pos.ipynb # acrostic vs mid-sentence positions
-│   ├── exp04c_per_head_heatmap.ipynb        # per-head attention heatmap
-│   ├── exp05a_head_ablation.ipynb           # analytical head ablation
-│   ├── exp06_control.ipynb                  # open acrostic control (attention)
-│   ├── exp07_prompt_attention.ipynb         # prompt attention analysis
-│   ├── exp08_logprob_calibration.ipynb      # log P at sentence-starts (stego vs open)
-│   └── exp08b_logprob_control.ipynb         # log P at sentence-starts (control vs open)
+│   ├── exp00_pipeline_sanity_check.ipynb        # activation probe pipeline
+│   ├── exp02b_probe_valid_pairs.ipynb            # linear probe on exp01 data
+│   ├── exp03_model_organism.ipynb                # LoRA model organism
+│   ├── exp04_attention_elevation.ipynb           # attention at acrostic positions
+│   ├── exp04b_acrostic_vs_control_pos.ipynb      # acrostic vs mid-sentence positions
+│   ├── exp04c_per_head_heatmap.ipynb             # per-head attention heatmap
+│   ├── exp05a_head_ablation.ipynb                # analytical head ablation
+│   ├── exp06_control.ipynb                       # open acrostic control (attention)
+│   ├── exp07_prompt_attention.ipynb              # prompt attention analysis
+│   ├── exp08_logprob_calibration.ipynb           # log P at sentence-starts (stego vs open)
+│   ├── exp08b_logprob_control.ipynb              # log P at sentence-starts (control vs open)
+│   ├── exp11_llama_generate.ipynb                # natural acrostic dataset generation
+│   ├── exp11b_llama_pilot.ipynb                  # pilot validation
+│   ├── exp13b_attention_triplets.ipynb           # entropy + within-KL on triplets
+│   ├── exp13d_directed_attention.ipynb           # directed attention to scheme + prev_starts
+│   └── exp14_mechanistic_validation.ipynb        # causal interventions (Colab A100)
+├── exp09b_readback_sampling.py                   # GPT-4o readback: single-sentence patch
+├── exp09c_midseq_patching.py                     # GPT-4o readback: mid-chain sweep
+├── exp09d_prefill_patching.py                    # GPT-4o readback: prefill + KL
+├── exp13d_directed_attention.py                  # directed attention (Llama, triplets)
+├── exp14_mechanistic_validation.py               # causal source masking + head ablation
 ├── results/
-│   ├── exp01/valid_pairs.json               # 303 contrastive pairs, Llama-3.1-8B
-│   ├── exp04/ … exp08b/                     # per-experiment outputs and plots
-│   └── exp00_layer_profile.png
+│   ├── exp01/valid_pairs.json                    # 303 contrastive pairs, Llama-3.1-8B
+│   ├── exp04/ … exp08b/                          # attention + log P experiments
+│   ├── exp09b/ exp09c/ exp09d/                   # GPT-4o readback experiments
+│   ├── exp10/ exp10b/ exp11/ exp12/              # natural acrostic dataset + attention metrics
+│   ├── exp13b/ exp13c/ exp13d/                   # triplet attention, logit-lens, directed attention
+│   └── exp14/                                    # causal mechanistic validation (main result)
 ├── docs/
-│   ├── papers.md                            # annotated literature survey
-│   └── SelfIE_rus.pdf                       # Russian translation of SelfIE paper
+│   ├── papers.md                                 # annotated literature survey
+│   └── SelfIE_rus.pdf                            # Russian translation of SelfIE paper
 ├── requirements.txt
 └── README.md
 ```
@@ -79,12 +98,23 @@ export HF_TOKEN=your_token_here
 | exp07 | Prompt attention analysis | Stego ≈ control in both metrics → structural | Done |
 | exp08 | Log P at sentence-starts: stego vs open | z_stego=+0.637, z_open=−0.470; t=10, p≈0 | Done |
 | exp08b | Log P at sentence-starts: control vs open | z_control=+0.514 ≈ z_stego → **structural, not stego-specific** | Done |
+| exp09b | GPT-4o readback: single-sentence S1 patch | 100% text-following, 0% plan-following | Done |
+| exp09c | GPT-4o readback: mid-chain sweep (K=2,3,4) | 81.7% text, 1.7% plan, 16.7% neither | Done |
+| exp09d | GPT-4o readback: prefill + KL divergence | KL_force=2.11, KL_placebo=0.001 (ratio 2100×) | Done |
+| exp10 | Attention entropy + within-KL (exp01 data) | Significant signals; stego-specificity untested | Done |
+| exp10b | Attention entropy + within-KL: control | Control ≈ stego → **structural** | Done |
+| exp11 | Natural acrostic dataset (Llama-3.1-8B) | 659 pairs, fidelity=1.0, no X- markers | Done |
+| exp12 | Attention signals on natural acrostics | Entropy signal persists; within-KL gap shrank | Done |
+| exp13b | Entropy + within-KL on triplets (stego/open/control) | stego ≈ control → **structural** | Done |
+| exp13c | Logit-lens P(letter) across 32 layers | Commitment at L16→L31, stego ≈ control trajectory | Done |
+| exp13d | Directed attention: paragraph-start → scheme / prev_starts | stego ≈ control → **structural** | Done |
+| exp14 | Causal source masking + head ablation (5 sub-exps) | Scheme (dz≈12) ≫ prev_starts (dz≈1.2) ≫ prev_token (n.s.) | Done |
 
 ### Summary of findings
 
-Both detection signals studied — attention elevation and log-probability elevation at constrained positions — are structural properties of any letter constraint, not diagnostic for steganographic hiding. A model following an open "start each step with S, A, F, E" instruction produces the same signal as a model given a hidden acrostic instruction.
+**Behavioral result (GPT-4o, exp09b–exp09d):** The model reads its own generated text and continues the acrostic from it — 81% text-following, <2% plan-following, KL_force/KL_placebo ratio = 2100×. There is no evidence of an internal plan independent of the generated sequence.
 
-The anomaly is genuine and large: in the stego/control conditions, sentence-start tokens are the most probable tokens in their CoT (z=+0.6), while in the open condition they are among the least probable (z=−0.5). This reflects instruction-following confidence, not steganographic intent.
+**Mechanistic result (Llama-3.1-8B, exp04–exp14):** Seven independent signals — attention elevation, head specialisation, log P z-score, attention entropy, within-KL divergence, logit-lens P(letter), directed attention, and causal source masking — all show stego ≈ control. The acrostic encoding mechanism is structural: it reflects constraint-following, not steganographic hiding. The model reads the required letter from the explicit letter tokens in the prompt scheme (dz≈12); the immediately preceding token is causally irrelevant (p=0.141). No signal tested can distinguish a hidden constraint from a visible one.
 
 ## Related Work
 
@@ -108,7 +138,9 @@ Full annotated bibliography: [docs/papers.md](docs/papers.md)
 
 ## Status
 
-Active research. Phases 1–3 complete (exp00–exp08b). Both attention-based and log-probability-based signals at acrostic positions have been characterized and found to be structural rather than stego-specific. Open questions: (1) whether any signal can distinguish hidden from open constraints; (2) propensity — whether models spontaneously produce steganographic structure without explicit instruction.
+Phases 1–6 complete (exp00–exp14). All mechanistic signals tested are structural — they distinguish "model is following a letter constraint" from "model is generating freely," but not "hidden constraint" from "visible constraint." The causal mechanism is established: the model reads the required letter directly from the explicit letter tokens in the prompt scheme.
+
+Open questions for future work: (1) scale comparison — behavioral readback tested on GPT-4o only; mechanistic analysis on Llama-3.1-8B only; (2) whether any signal generalises to detect stego schemes beyond acrostic; (3) whether frontier models show different internal mechanisms for hidden vs visible constraints.
 
 ## Citation
 
